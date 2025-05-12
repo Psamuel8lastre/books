@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Libros</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <!-- Tus estilos personalizados -->
+  <link rel="stylesheet" href="/public/stylesheets/style.css">
+</head>
+<body class="main-container justify-content-between">
+
+  <% if (messages.success) { %>
+    <div class="alert alert-success custom-alert"><%- messages.success %></div>
+  <% } %>
+
+  <% if (messages.error) { %>
+    <div class="alert alert-danger custom-alert"><%- messages.error %></div>
+  <% } %>
+  
+<div>
+  <div class="card custom-card">
+    <div class="card-header d-flex justify-content-between align-items-center header-flex">
+      <h3 class="title">📚 Mis Libros</h3>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+      <a href="/books/add" class="btn btn-primary btn-pill">+ Agregar Libro</a>
+    </div>
+
+    <% if(data.length) { %>
+      <div class="table-responsive">
+        <table class="table table-hover custom-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nombre</th>
+              <th>Autor</th>
+              <th class="text-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(var i = 0; i < data.length; i++) { %>
+              <tr>
+                <th scope="row"><%= (i+1) %></th>
+                <td><%= data[i].name %></td>
+                <td><%= data[i].author %></td>
+                <td class="text-center">
+                  <a href="../books/edit/<%= data[i].id %>" class="btn btn-success btn-sm btn-rounded mr-2">Editar</a>
+                  <a href="../books/delete/<%= data[i].id %>" class="btn btn-danger btn-sm btn-rounded" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
+                </td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    <% } else { %>
+      <p class="text-muted text-center">No se encontraron libros. ¡Comienza agregando uno!</p>
+    <% } %>
+  </div>
+</div>
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
