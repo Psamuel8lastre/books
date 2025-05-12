@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## Node.js CRUD with Express.js & MySQL
 Tutorial Link: [Node.js Simple CRUD with Express.js and MySQL](https://shouts.dev/articles/nodejs-simple-crud-with-expressjs-and-mysql)
 
@@ -8,3 +9,6 @@ Tutorial Link: [Node.js Simple CRUD with Express.js and MySQL](https://shouts.de
 You can download the project, modify the code and use it anywhere you want without re-posting to your blog. Happy Coding :)
 
 Thank you.
+=======
+# books
+>>>>>>> d04fe4d7065c97da6026b558aabc33cc731d371f
