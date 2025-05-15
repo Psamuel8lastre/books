@@ -1,88 +1,49 @@
+:root {
+  --primary-color: #4e73df;
+  --gradient: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+}
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  
+  background-color: #f8f9fc;
+  height: 100vh;
 }
 
-a {
-  color: #00B7FF;
+.login-container {
+  max-width: 400px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
-
-body.main-container {
-  background-color: #f4f6f9;
-  padding-top: 50px;
-}
-
-.custom-card {
-  border: none;
-  border-radius: 1rem;
-  padding: 2rem;
-  margin-bottom: 2rem;
-  background-color: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-.custom-alert {
-  margin-bottom: 20px;
-  border-radius: 50px;
+.login-header {
+  background: var(--gradient);
+  padding: 30px;
+  color: white;
   text-align: center;
 }
 
-.header-flex {
-  margin-bottom: 1.5rem;
+.login-body {
+  padding: 30px;
+  background: white;
 }
 
-.title {
-  margin: 0;
-  color: #007bff;
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.25rem rgba(78, 115, 223, 0.25);
 }
 
-.btn-pill {
-  border-radius: 50rem;
-  padding: 0.5rem 1.5rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+.btn-login {
+  background: var(--gradient);
+  border: none;
+  transition: all 0.3s;
 }
 
-.btn-rounded {
+.btn-login:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(78, 115, 223, 0.4);
+}
+
+.social-login .btn {
   border-radius: 50px;
+  margin: 0 5px;
 }
-
-.custom-table thead {
-  background-color: #007bff;
-  color: white;
-  border-radius: .5rem;
-}
-/* estilo del index */
-/* Centrado total */
-.add-book-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #f8f9fa; /* opcional: fondo suave */
-}
-
-/* Contenedor principal de la card */
-.add-book-container {
-  width: 100%;
-  max-width: 500px;
-  padding: 20px;
-}
-
-/* Estilos personalizados para la card */
-.add-book-card {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-}
-
-/* Opcional: margen para el alert */
-.custom-alert {
-  position: absolute;
-  top: 20px;
-  width: 100%;
-  max-width: 500px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
