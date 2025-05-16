@@ -8,17 +8,19 @@ const rateLimit = require('express-rate-limit');
 const flash = require('express-flash');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
-const connection = require('./lib/db');
+
+//const dbSessionConfig = require('./lib/dbSession');
 
 // Routers
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const booksRouter = require('./routes/books');
 const loginRouter = require('./routes/login');
+const registerRouter = require('./routes/register');
 
 const app = express();
 
-// Configuración
+// Configuración de vistas
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -30,26 +32,28 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Sesión (segura para producción)
+// Sesión
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'secret',
+    secret: 'secreto_seguro',
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: process.env.NODE_ENV === 'production', maxAge: 86400000 },
-    store: new MySQLStore({}, connection)
+    //store: new MySQLStore(dbSessionConfig),
+    cookie: { secure: false, maxAge: 86400000 }
 }));
 app.use(flash());
 
-// Rate Limiting
-app.use('/login', rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
+// Rate limiting
+app.use('/auth/login', rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
 
 // Rutas
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/books', booksRouter);
 app.use('/auth', loginRouter);
+app.use('/auth', registerRouter);
 
-// 404 y manejo de errores
+
+// Errores
 app.use((req, res, next) => next(createError(404)));
 app.use((err, req, res, next) => {
     res.status(err.status || 500).render('error', {
