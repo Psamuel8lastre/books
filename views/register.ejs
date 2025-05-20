@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro - Biblioteca Digital</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+    .card {
+      border-radius: 15px;
+      border: none;
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card-header {
+      background: #4a6fa5;
+      color: white;
+      font-size: 1.2rem;
+      padding: 1.2rem;
+    }
+    .form-control:focus {
+      border-color: #4a6fa5;
+      box-shadow: 0 0 0 0.25rem rgba(74, 111, 165, 0.25);
+    }
+    .btn-primary {
+      background-color: #4a6fa5;
+      border: none;
+      padding: 12px;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background-color: #3a5678;
+      transform: scale(1.02);
+    }
+    .password-toggle {
+      cursor: pointer;
+      position: absolute;
+      right: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+    }
+    .loading {
+      display: none;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  </style>
+</head>
+<body class="d-flex justify-content-center align-items-center min-vh-100">
+
+  <% if (messages.error || messages.success) { %>
+  <div class="position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 1000;">
+    <div class="alert <%= messages.error ? 'alert-danger' : 'alert-success' %> alert-dismissible fade show" role="alert">
+      <i class="fas <%= messages.error ? 'fa-exclamation-circle' : 'fa-check-circle' %> me-2"></i>
+      <%= messages.error || messages.success %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>
+  <% } %>
+
+  <div class="card shadow mx-3" style="max-width: 500px;">
+    <div class="card-header text-center">
+      <i class="fas fa-user-plus me-2"></i>Crear Cuenta
+    </div>
+    <div class="card-body p-4">
+      <form action="/auth/register" method="POST" id="registerForm" novalidate>
+        <div class="mb-4">
+          <label class="form-label">Nombre completo</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-user"></i></span>
+            <input type="text" class="form-control <%= messages.fieldErrors?.nombre ? 'is-invalid' : '' %>" 
+                   name="nombre" placeholder="Ej: María González" required>
+            <% if (messages.fieldErrors?.nombre) { %>
+              <div class="invalid-feedback">
+                <%= messages.fieldErrors.nombre %>
+              </div>
+            <% } %>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">Correo electrónico</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+            <input type="email" class="form-control <%= messages.fieldErrors?.email ? 'is-invalid' : '' %>" 
+                   name="email" placeholder="ejemplo@correo.com" required>
+            <% if (messages.fieldErrors?.email) { %>
+              <div class="invalid-feedback">
+                <%= messages.fieldErrors.email %>
+              </div>
+            <% } %>
+          </div>
+        </div>
+
+        <div class="mb-4 position-relative">
+          <label class="form-label">Contraseña</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+            <input type="password" class="form-control <%= messages.fieldErrors?.password ? 'is-invalid' : '' %>" 
+                   name="password" id="password" placeholder="Mínimo 8 caracteres" required>
+            <i class="password-toggle fas fa-eye-slash" onclick="togglePassword()"></i>
+            <% if (messages.fieldErrors?.password) { %>
+              <div class="invalid-feedback">
+                <%= messages.fieldErrors.password %>
+              </div>
+            <% } %>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">Confirmar Contraseña</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-check-double"></i></span>
+            <input type="password" class="form-control" 
+                   name="confirm-password" placeholder="Repite tu contraseña" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 mb-3">
+          <span class="spinner-border spinner-border-sm loading" role="status"></span>
+          <span class="submit-text">Registrarse</span>
+        </button>
+
+        <div class="text-center mt-3">
+          <a href="/auth/login" class="text-decoration-none text-muted">
+            ¿Ya tienes cuenta? <span class="text-primary">Inicia sesión</span>
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>
+  <script>
+    function togglePassword() {
+      const passwordField = document.getElementById('password');
+      const toggleIcon = document.querySelector('.password-toggle');
+      
+      if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
+      } else {
+        passwordField.type = 'password';
+        toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
+      }
+    }
+
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      const btn = this.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.querySelector('.submit-text').textContent = 'Registrando...';
+      btn.querySelector('.loading').style.display = 'inline-block';
+    });
+  </script>
+</body>
+</html>

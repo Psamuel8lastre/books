@@ -1,0 +1,119 @@
+:root {
+  --primary-color: #4e73df;
+  --gradient: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+}
+
+body {
+  background-color: #f8f9fc;
+  height: 100vh;
+}
+
+.login-container {
+  max-width: 400px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.login-header {
+  background: var(--gradient);
+  padding: 30px;
+  color: white;
+  text-align: center;
+}
+
+.login-body {
+  padding: 30px;
+  background: white;
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.25rem rgba(78, 115, 223, 0.25);
+}
+
+.btn-login {
+  background: var(--gradient);
+  border: none;
+  transition: all 0.3s;
+}
+
+.btn-login:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(78, 115, 223, 0.4);
+}
+
+.social-login .btn {
+  border-radius: 50px;
+  margin: 0 5px;
+}
+
+
+
+/* estilos de index
+ */
+
+:root {
+      --primary: #4e73df;
+      --secondary: #f8f9fc;
+      --accent: #2e59d9;
+      --dark: #2c3e50;
+      --light: #f8f9fa;
+    }
+    .sidebar {
+      background: var(--dark);
+      min-height: 100vh;
+      color: white;
+      transition: all 0.3s;
+    }
+    .nav-link {
+      color: rgba(255,255,255,0.8);
+      border-radius: 5px;
+      margin: 2px 0;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: white;
+      background: var(--primary);
+    }
+    .book-card {
+      transition: all 0.3s;
+      height: 100%;
+      border: none;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    .book-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    .book-cover {
+      height: 220px;
+      object-fit: cover;
+      object-position: center;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    .status-available { border-left: 4px solid #28a745; }
+    .status-loaned { border-left: 4px solid #ffc107; }
+    .status-overdue { border-left: 4px solid #dc3545; }
+    .pagination .page-item.active .page-link {
+      background-color: var(--primary);
+      border-color: var(--primary);
+    }
+    .dataTables_filter input {
+      border-radius: 20px;
+      padding: 5px 15px;
+      border: 1px solid #ddd;
+    }
+    .search-box {
+      position: relative;
+    }
+    .search-box i {
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      color: #aaa;
+    }
+    .search-box input {
+      padding-left: 40px;
+      border-radius: 20px;
+    }
+
