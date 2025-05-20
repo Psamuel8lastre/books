@@ -75,6 +75,11 @@ body {
       color: white;
       background: var(--primary);
     }
+    .navbar{
+       background: var(--dark);
+      color: white;
+      transition: all 0.3s;
+    }
     .book-card {
       transition: all 0.3s;
       height: 100%;
@@ -117,3 +122,590 @@ body {
       border-radius: 20px;
     }
 
+/*prestamos*/
+
+/* Layout General */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100vw;
+}
+
+.sidebar {
+  background: var(--dark);
+  min-width: 220px;
+  max-width: 250px;
+  color: white;
+  min-height: 100vh;
+  padding: 0;
+  position: relative;
+  z-index: 10;
+  border-right: 1px solid #222c3c;
+  display: flex;
+  flex-direction: column;
+  /* El sidebar nunca se colapsa ni cambia de tamaño */
+}
+
+.main-content {
+  flex: 1;
+  background: #f8f9fc;
+  min-height: 100vh;
+  padding: 2rem 2rem 2rem 2rem;
+  width: 100%;
+  margin-left: 0;
+  overflow-x: auto;
+}
+
+@media (max-width: 991px) {
+  .main-content {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 0.5rem;
+  }
+  .banner {
+    padding: 1.5rem 0.5rem;
+  }
+  .card-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1rem;
+  }
+}
+
+/* El sidebar nunca se oculta ni se colapsa, solo el contenido principal se adapta */
+
+.container-fluid {
+  padding: 0 2rem;
+  max-width: 100%;
+}
+
+/* Encabezado */
+.loans-header {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+.page-title {
+  color: #2d3748;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.btn-add {
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.2);
+}
+
+/* Tarjetas de estadísticas */
+.stats-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.stat-card {
+  position: relative;
+  padding: 1.5rem;
+  border-radius: 10px;
+  color: white;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.stat-card.total {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+}
+
+.stat-card.active {
+  background: linear-gradient(135deg, #10b981, #34d399);
+}
+
+.stat-card.overdue {
+  background: linear-gradient(135deg, #ef4444, #f87171);
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.stat-icon {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 1.75rem;
+  opacity: 0.3;
+}
+
+/* Grid de préstamos */
+.loans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.loan-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 0.7rem 0.7rem 0.5rem 0.7rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  border-left: 2px solid #4f46e5;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 240px;
+  min-width: 160px;
+  font-size: 0.88rem;
+}
+
+.loan-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.loan-card.activo {
+  border-left-color: #10b981;
+}
+
+.loan-card.vencido {
+  border-left-color: #ef4444;
+}
+
+.loan-card.devuelto {
+  border-left-color: #3b82f6;
+}
+
+.loan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.loan-id {
+  font-weight: 700;
+  color: #64748b;
+}
+
+.loan-status {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: 50px;
+  text-transform: uppercase;
+}
+
+.loan-card.activo .loan-status {
+  background: #e3f9e5;
+  color: #1b9a3d;
+}
+
+.loan-card.vencido .loan-status {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.loan-card.devuelto .loan-status {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.loan-book, .loan-user {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.loan-book i, .loan-user i {
+  margin-right: 0.75rem;
+  color: #64748b;
+  width: 20px;
+  text-align: center;
+}
+
+.loan-dates {
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin: 1.25rem 0;
+}
+
+.date-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.date-item:last-child {
+  margin-bottom: 0;
+}
+
+.date-label {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.date-value {
+  font-weight: 600;
+  color: #334155;
+}
+
+.loan-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.btn-edit, .btn-delete {
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.btn-edit {
+  background: #e0e7ff;
+  color: #4f46e5;
+  border: none;
+}
+
+.btn-edit:hover {
+  background: #4f46e5;
+  color: white;
+}
+
+.btn-delete {
+  background: #fee2e2;
+  color: #ef4444;
+  border: none;
+}
+
+.btn-delete:hover {
+  background: #ef4444;
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .main-content {
+    padding-left: 220px;
+  }
+}
+
+@media (max-width: 992px) {
+  .main-content {
+    padding-left: 0;
+  }
+  
+  .loans-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .loan-actions {
+    flex-direction: column;
+  }
+}
+
+/* Footer Styles */
+.app-footer {
+  background-color: var(--dark);
+  color: white;
+  padding: 3rem 0 0;
+  margin-top: 3rem;
+  font-size: 0.9rem;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.footer-section {
+  margin-bottom: 2rem;
+}
+
+.footer-title {
+  color: white;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.footer-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50px;
+  height: 2px;
+  background-color: var(--primary);
+}
+
+.footer-text {
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: var(--transition);
+}
+
+.social-link:hover {
+  background-color: var(--primary);
+  transform: translateY(-3px);
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-link {
+  color: rgba(255, 255, 255, 0.7);
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+}
+
+.footer-link i {
+  margin-right: 0.5rem;
+  font-size: 0.7rem;
+  color: var(--primary);
+}
+
+.footer-link:hover {
+  color: white;
+  padding-left: 5px;
+  text-decoration: none;
+}
+
+.contact-info {
+  list-style: none;
+  padding: 0;
+}
+
+.contact-info li {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: flex-start;
+}
+
+.contact-info i {
+  margin-right: 0.75rem;
+  color: var(--primary);
+  margin-top: 3px;
+}
+
+.newsletter-form {
+  display: flex;
+  margin-top: 1rem;
+}
+
+.newsletter-input {
+  flex: 1;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px 0 0 4px;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.newsletter-btn {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 0 1.25rem;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.newsletter-btn:hover {
+  background-color: var(--accent);
+}
+
+.footer-bottom {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 1.5rem 2rem;
+  margin-top: 2rem;
+}
+
+.copyright {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+}
+
+.legal-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.legal-link {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+  transition: var(--transition);
+}
+
+.legal-link:hover {
+  color: white;
+  text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .footer-bottom {
+    text-align: center;
+  }
+  
+  .legal-links {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+/* ESTILOS AUTORES */
+.autores-container {
+  display: flex;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.sidebar {
+  min-width: 220px;
+  max-width: 250px;
+  background: #312e81;
+  color: #fff;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.autores-main-content {
+  flex: 1;
+  padding: 2.5rem 2rem 1.5rem 2rem;
+  background: #f8fafc;
+}
+
+.autores-table .table {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.autores-table th, .autores-table td {
+  vertical-align: middle;
+  font-size: 1rem;
+}
+
+.autores-table th {
+  background: #f1f5f9;
+  color: #312e81;
+  font-weight: 700;
+  border-bottom: 2px solid #e0e7ef;
+}
+
+.autores-table td {
+  color: #334155;
+}
+
+.autores-table .btn {
+  font-size: 0.95rem;
+  padding: 0.25rem 0.7rem;
+}
+
+.autores-table .btn-outline-success {
+  border-color: #10b981;
+  color: #10b981;
+}
+.autores-table .btn-outline-success:hover {
+  background: #10b981;
+  color: #fff;
+}
+.autores-table .btn-outline-danger {
+  border-color: #ef4444;
+  color: #ef4444;
+}
+.autores-table .btn-outline-danger:hover {
+  background: #ef4444;
+  color: #fff;
+}
+
+@media (max-width: 900px) {
+  .autores-main-content {
+    padding: 1.2rem 0.5rem;
+  }
+  .sidebar {
+    min-width: 60px;
+    max-width: 60px;
+    padding: 0.5rem 0.2rem;
+  }
+  .autores-table th, .autores-table td {
+    font-size: 0.92rem;
+  }
+}

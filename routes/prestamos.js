@@ -6,10 +6,23 @@ const db = require('../lib/db');
 router.get('/', async (req, res) => {
   try {
     const [rows] = await db.query('SELECT * FROM prestamos ORDER BY id DESC');
-    res.render('books/prestamos', { data: rows, messages: req.flash() });
+    const totalPrestamos = rows.length;
+    const prestamosActivos = rows.filter(p =>
+      p.estado && p.estado.toLowerCase().includes('activo')
+    ).length;
+    const prestamosVencidos = rows.filter(p =>
+      p.estado && p.estado.toLowerCase().includes('vencid')
+    ).length;
+    res.render('books/prestamos', {
+      data: rows,
+      totalPrestamos,
+      prestamosActivos,
+      prestamosVencidos,
+      messages: req.flash()
+    });
   } catch (err) {
     req.flash('error', err.message);
-    res.render('books/prestamos', { data: [], messages: req.flash() });
+    res.render('books/prestamos', { data: [], totalPrestamos: 0, prestamosActivos: 0, prestamosVencidos: 0, messages: req.flash() });
   }
 });
 
