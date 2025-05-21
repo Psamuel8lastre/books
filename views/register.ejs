@@ -2,39 +2,48 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registro - Biblioteca Digital</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root {
+      --primary-color: #4e73df;
+      --gradient: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+    }
     body {
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      background-color: #f8f9fc;
+      height: 100vh;
     }
-    .card {
+    .register-container {
+      max-width: 400px;
       border-radius: 15px;
-      border: none;
-      transition: transform 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
     }
-    .card:hover {
-      transform: translateY(-5px);
-    }
-    .card-header {
-      background: #4a6fa5;
+    .register-header {
+      background: var(--gradient);
+      padding: 50px;
+      width: 100%;
       color: white;
-      font-size: 1.2rem;
-      padding: 1.2rem;
+      text-align: center;
+    }
+    .register-body {
+      padding: 30px;
+      background: white;
     }
     .form-control:focus {
-      border-color: #4a6fa5;
-      box-shadow: 0 0 0 0.25rem rgba(74, 111, 165, 0.25);
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 0.25rem rgba(78, 115, 223, 0.25);
     }
-    .btn-primary {
-      background-color: #4a6fa5;
+    .btn-register {
+      background: var(--gradient);
       border: none;
-      padding: 12px;
-      transition: all 0.3s ease;
+      transition: all 0.3s;
     }
-    .btn-primary:hover {
-      background-color: #3a5678;
-      transform: scale(1.02);
+    .btn-register:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(78, 115, 223, 0.4);
     }
     .password-toggle {
       cursor: pointer;
@@ -51,23 +60,29 @@
     }
   </style>
 </head>
-<body class="d-flex justify-content-center align-items-center min-vh-100">
-
-  <% if (messages.error || messages.success) { %>
-  <div class="position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 1000;">
-    <div class="alert <%= messages.error ? 'alert-danger' : 'alert-success' %> alert-dismissible fade show" role="alert">
-      <i class="fas <%= messages.error ? 'fa-exclamation-circle' : 'fa-check-circle' %> me-2"></i>
-      <%= messages.error || messages.success %>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<body class="d-flex w-100 align-items-center justify-content-center min-vh-100" >
+  <% if (messages && (messages.success || messages.error)) { %>
+  <div id="floating-alert" class="custom-alert <%= messages.success ? 'custom-alert-success' : 'custom-alert-danger' %>">
+    <div class="d-flex align-items-center">
+      <div class="me-3">
+        <% if (messages.success) { %>
+          <i class="fas fa-check-circle fa-2x"></i>
+        <% } else { %>
+          <i class="fas fa-exclamation-circle fa-2x"></i>
+        <% } %>
+      </div>
+      <div class="flex-fill">
+        <%= messages.success || messages.error %>
+      </div>
     </div>
   </div>
   <% } %>
-
-  <div class="card shadow mx-3" style="max-width: 500px;">
-    <div class="card-header text-center">
-      <i class="fas fa-user-plus me-2"></i>Crear Cuenta
+  <div class="register-container mx-auto">
+    <div class="register-header">
+      <h2><i class="fas fa-user-plus me-2"></i> Crear Cuenta</h2>
+      <p class="mb-0">Regístrate para acceder a la biblioteca</p>
     </div>
-    <div class="card-body p-4">
+    <div class="register-body">
       <form action="/auth/register" method="POST" id="registerForm" novalidate>
         <div class="mb-4">
           <label class="form-label">Nombre completo</label>
@@ -82,7 +97,6 @@
             <% } %>
           </div>
         </div>
-
         <div class="mb-4">
           <label class="form-label">Correo electrónico</label>
           <div class="input-group">
@@ -96,7 +110,6 @@
             <% } %>
           </div>
         </div>
-
         <div class="mb-4 position-relative">
           <label class="form-label">Contraseña</label>
           <div class="input-group">
@@ -111,7 +124,6 @@
             <% } %>
           </div>
         </div>
-
         <div class="mb-4">
           <label class="form-label">Confirmar Contraseña</label>
           <div class="input-group">
@@ -120,12 +132,10 @@
                    name="confirm-password" placeholder="Repite tu contraseña" required>
           </div>
         </div>
-
-        <button type="submit" class="btn btn-primary w-100 mb-3">
+        <button type="submit" class="btn btn-register w-100 mb-3">
           <span class="spinner-border spinner-border-sm loading" role="status"></span>
           <span class="submit-text">Registrarse</span>
         </button>
-
         <div class="text-center mt-3">
           <a href="/auth/login" class="text-decoration-none text-muted">
             ¿Ya tienes cuenta? <span class="text-primary">Inicia sesión</span>
@@ -134,14 +144,12 @@
       </form>
     </div>
   </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
   <script>
     function togglePassword() {
       const passwordField = document.getElementById('password');
       const toggleIcon = document.querySelector('.password-toggle');
-      
       if (passwordField.type === 'password') {
         passwordField.type = 'text';
         toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
@@ -150,7 +158,6 @@
         toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
       }
     }
-
     document.getElementById('registerForm').addEventListener('submit', function(e) {
       const btn = this.querySelector('button[type="submit"]');
       btn.disabled = true;

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recuperar Contraseña - Biblioteca Digital</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #4e73df;
+      --gradient: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+    }
+    body {
+      background-color: #f8f9fc;
+      height: 100vh;
+    }
+    .recovery-container {
+      max-width: 400px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    .recovery-header {
+      background: var(--gradient);
+      padding: 30px;
+      color: white;
+      text-align: center;
+    }
+    .recovery-body {
+      padding: 30px;
+      background: white;
+    }
+    .form-control:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 0.25rem rgba(78, 115, 223, 0.25);
+    }
+    .btn-recovery {
+      background: var(--gradient);
+      border: none;
+      transition: all 0.3s;
+    }
+    .btn-recovery:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(78, 115, 223, 0.4);
+    }
+  </style>
+</head>
+<body class="d-flex align-items-center justify-content-center min-vh-100">
+  <div class="recovery-container mx-auto">
+    <div class="recovery-header">
+      <h2><i class="fas fa-unlock-alt me-2"></i> Recuperar Contraseña</h2>
+      <p class="mb-0">Ingresa tu correo para restablecer tu contraseña</p>
+    </div>
+    <div class="recovery-body">
+      <form action="/auth/recuperar" method="POST">
+        <div class="mb-4">
+          <label class="form-label">Correo electrónico</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+            <input type="email" class="form-control" name="email" placeholder="ejemplo@correo.com" required>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-recovery w-100 mb-3">
+          Enviar enlace de recuperación
+        </button>
+        <div class="text-center mt-3">
+          <a href="/auth/login" class="text-decoration-none text-muted">
+            ¿Ya tienes cuenta? <span class="text-primary">Inicia sesión</span>
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

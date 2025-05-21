@@ -35,12 +35,26 @@ router.post('/login', async (req, res) => {
     req.session.user = { id: user.id, nombre: user.nombre, email: user.email };
 
     req.flash('success', `¡Bienvenido, ${user.nombre}!`);
-    res.redirect('/books');
+    res.redirect('/');
   } catch (err) {
     console.error('Error en login:', err);
     req.flash('error', 'Error del servidor, intenta más tarde');
     res.redirect('/auth/login');
   }
+});
+
+// Recuperar contraseña - mostrar formulario
+router.get('/recuperar', (req, res) => {
+  res.render('recuperar', { messages: req.flash() });
+});
+
+// Recuperar contraseña - procesar formulario
+router.post('/recuperar', async (req, res) => {
+  const { email } = req.body;
+  // Aquí deberías buscar el usuario y enviar el correo real
+  // Por ahora solo simula el proceso
+  req.flash('success', 'Si el correo existe, se ha enviado un enlace de recuperación.');
+  res.redirect('/auth/recuperar');
 });
 
 module.exports = router;

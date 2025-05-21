@@ -3,7 +3,16 @@ const router = express.Router();
 const db = require('../lib/db');
 
 /* GET home page. */
+// Ruta landing page Home
+router.get('/home', (req, res) => {
+  res.render('home');
+});
+
+// Ruta principal: dashboard con contadores
 router.get('/', async function(req, res, next) {
+  if (!req.session || !req.session.user) {
+    return res.redirect('/home');
+  }
   try {
     // Contar libros
     const [books] = await db.query('SELECT COUNT(*) as total FROM books');
