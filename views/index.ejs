@@ -172,62 +172,42 @@
         <!-- Stats Cards -->
         <div class="row mb-4">
           <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-start border-primary border-4 h-100 py-2">
-              <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                  <div class="col me-2">
-                    <div class="text-xs fw-bold text-primary mb-1">Libros Disponibles</div>
-                    <div class="h5 mb-0 fw-bold"><%= typeof totalLibros !== 'undefined' ? totalLibros : 0 %></div>
-                  </div>
-                  <div class="col-auto">
-                    <i class="fas fa-book fa-2x text-primary"></i>
-                  </div>
-                </div>
+            <div class="card stats-card h-100">
+              <div class="card-body text-center">
+                <div class="icon-bg mb-2"><i class="fas fa-book"></i></div>
+                <div class="stat-label">Libros Disponibles</div>
+                <div class="stat-value"><%= typeof totalLibros !== 'undefined' ? totalLibros : 0 %></div>
+                <div class="stat-extra">en catálogo</div>
               </div>
             </div>
           </div>
           <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-start border-success border-4 h-100 py-2">
-              <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                  <div class="col me-2">
-                    <div class="text-xs fw-bold text-success mb-1">Préstamos Activos</div>
-                    <div class="h5 mb-0 fw-bold"><%= typeof prestamosActivos !== 'undefined' ? prestamosActivos : 0 %></div>
-                  </div>
-                  <div class="col-auto">
-                    <i class="fas fa-exchange-alt fa-2x text-success"></i>
-                  </div>
-                </div>
+            <div class="card stats-card h-100">
+              <div class="card-body text-center">
+                <div class="icon-bg mb-2" style="background:linear-gradient(135deg,#22c55e 60%,#bef264 100%)"><i class="fas fa-exchange-alt"></i></div>
+                <div class="stat-label" style="color:#22c55e">Préstamos Activos</div>
+                <div class="stat-value"><%= typeof prestamosActivos !== 'undefined' ? prestamosActivos : 0 %></div>
+                <div class="stat-extra">en curso</div>
               </div>
             </div>
           </div>
           <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-start border-warning border-4 h-100 py-2">
-              <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                  <div class="col me-2">
-                    <div class="text-xs fw-bold text-warning mb-1">Préstamos Vencidos</div>
-                    <div class="h5 mb-0 fw-bold"><%= typeof prestamosVencidos !== 'undefined' ? prestamosVencidos : 0 %></div>
-                  </div>
-                  <div class="col-auto">
-                    <i class="fas fa-exclamation-triangle fa-2x text-warning"></i>
-                  </div>
-                </div>
+            <div class="card stats-card h-100">
+              <div class="card-body text-center">
+                <div class="icon-bg mb-2" style="background:linear-gradient(135deg,#f59e42 60%,#fde68a 100%)"><i class="fas fa-exclamation-triangle"></i></div>
+                <div class="stat-label" style="color:#f59e42">Préstamos Vencidos</div>
+                <div class="stat-value"><%= typeof prestamosVencidos !== 'undefined' ? prestamosVencidos : 0 %></div>
+                <div class="stat-extra">requieren atención</div>
               </div>
             </div>
           </div>
           <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-start border-info border-4 h-100 py-2">
-              <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                  <div class="col me-2">
-                    <div class="text-xs fw-bold text-info mb-1">Autores Registrados</div>
-                    <div class="h5 mb-0 fw-bold"><%= typeof totalAutores !== 'undefined' ? totalAutores : 0 %></div>
-                  </div>
-                  <div class="col-auto">
-                    <i class="fas fa-pen-fancy fa-2x text-info"></i>
-                  </div>
-                </div>
+            <div class="card stats-card h-100">
+              <div class="card-body text-center">
+                <div class="icon-bg mb-2" style="background:linear-gradient(135deg,#0ea5e9 60%,#a5b4fc 100%)"><i class="fas fa-pen-fancy"></i></div>
+                <div class="stat-label" style="color:#0ea5e9">Autores Registrados</div>
+                <div class="stat-value"><%= typeof totalAutores !== 'undefined' ? totalAutores : 0 %></div>
+                <div class="stat-extra">en sistema</div>
               </div>
             </div>
           </div>

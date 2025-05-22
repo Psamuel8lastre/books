@@ -11,7 +11,7 @@
 <body>
   <div class="app-container">
     <!-- Sidebar -->
-    <nav class="sidebar">
+    <div class="sidebar col-md-3 col-lg-2 p-0">
       <div class="p-4">
         <h4 class="mb-4 text-center">
           <i class="fas fa-book-open me-2"></i>Biblioteca 
@@ -19,13 +19,13 @@
         <hr class="bg-light opacity-25">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link" href="/">
+            <a class="nav-link " href="/">
               <i class="fas fa-tachometer-alt me-2"></i>Dashboard
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/books">
-              <i class="fas fa-book me-2"></i>Libros
+              <i class="fas fa-book me-2"></i>libros
             </a>
           </li>
           <li class="nav-item">
@@ -50,7 +50,7 @@
           </li>
         </ul>
       </div>
-    </nav>
+    </div>
 
     <!-- Main Content -->
     <main class="main-content">
@@ -146,6 +146,114 @@
           background: #d1fae5;
           color: #065f46;
           border-left: 6px solid #10b981;
+        }
+        .loans-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+          gap: 1.1rem;
+        }
+        .loan-card {
+          background: #fff;
+          border-radius: 1rem;
+          box-shadow: 0 2px 12px 0 rgba(99,102,241,0.10);
+          padding: 1.1rem 1.1rem 0.8rem 1.1rem;
+          min-height: 150px;
+          max-width: 260px;
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          transition: box-shadow 0.2s, transform 0.2s;
+          font-size: 1.04rem;
+        }
+        .loan-card:hover {
+          box-shadow: 0 6px 24px #10b98133;
+          transform: translateY(-3px) scale(1.03);
+        }
+        .loan-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 1.05rem;
+          font-weight: 600;
+          color: #6366f1;
+          margin-bottom: 0.4rem;
+        }
+        .loan-status {
+          font-size: 1rem;
+          padding: 0.22rem 0.9rem;
+          border-radius: 1rem;
+          background: #f0fdf4;
+          color: #10b981;
+          font-weight: 500;
+        }
+        .loan-card.overdue .loan-status, .loan-card.vencido .loan-status {
+          background: #fee2e2;
+          color: #b91c1c;
+        }
+        .loan-card.active .loan-status, .loan-card.activo .loan-status {
+          background: #d1fae5;
+          color: #10b981;
+        }
+        .loan-book, .loan-user {
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+          font-size: 1.05rem;
+          color: #6366f1;
+          margin-bottom: 0.2rem;
+        }
+        .loan-book i, .loan-user i {
+          color: #10b981;
+        }
+        .loan-dates {
+          font-size: 0.98rem;
+          color: #64748b;
+          margin-bottom: 0.3rem;
+        }
+        .date-item {
+          display: flex;
+          justify-content: space-between;
+        }
+        .loan-actions {
+          display: flex;
+          gap: 0.6rem;
+          margin-top: 0.3rem;
+        }
+        .btn-edit, .btn-delete {
+          font-size: 0.98rem;
+          padding: 0.22rem 0.9rem;
+          border-radius: 0.5rem;
+          border: none;
+          transition: background 0.2s, color 0.2s;
+        }
+        .btn-edit {
+          background: #f0fdf4;
+          color: #10b981;
+        }
+        .btn-edit:hover {
+          background: #10b981;
+          color: #fff;
+        }
+        .btn-delete {
+          background: #fee2e2;
+          color: #b91c1c;
+        }
+        .btn-delete:hover {
+          background: #b91c1c;
+          color: #fff;
+        }
+        @media (max-width: 600px) {
+          .loans-grid {
+            grid-template-columns: 1fr;
+            gap: 0.7rem;
+          }
+          .loan-card {
+            max-width: 98vw;
+            padding: 0.7rem 0.4rem 0.4rem 0.4rem;
+            min-height: 120px;
+            font-size: 0.98rem;
+          }
         }
         </style>
         <script>

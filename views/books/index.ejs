@@ -147,7 +147,7 @@
   <!-- Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script>
     function validateSearch() {
       const input = document.getElementById('searchInput').value.trim();
@@ -202,6 +202,114 @@
       background: #d1fae5;
       color: #065f46;
       border-left: 6px solid #10b981;
+    }
+    /* --- ESTILOS MODERNOS PARA LA VISTA DE LIBROS --- */
+    .banner {
+      background: linear-gradient(90deg, #6366f1 0%, #10b981 100%);
+      color: #fff !important;
+      border-radius: 1.5rem;
+      box-shadow: 0 6px 32px 0 rgba(99,102,241,0.10);
+      margin-bottom: 2.5rem;
+      padding: 2.5rem 1rem 2.5rem 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .banner h1 {
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px #6366f133;
+    }
+    .banner .lead {
+      font-size: 1.2rem;
+      color: #e0e7ff;
+      margin-bottom: 1.2rem;
+    }
+    .banner .btn {
+      font-weight: 600;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px #6366f122;
+      background: #fff;
+      color: #6366f1;
+      border: none;
+      transition: box-shadow 0.3s, transform 0.3s, background 0.3s;
+    }
+    .banner .btn:hover {
+      background: #f0fdf4;
+      color: #10b981;
+      transform: scale(1.06) translateY(-2px);
+      box-shadow: 0 6px 18px #10b98155;
+    }
+    .card.shadow-sm {
+      border-radius: 1.2rem;
+      box-shadow: 0 4px 24px 0 rgba(99,102,241,0.10);
+      border: none;
+    }
+    .card-header {
+      background: #fff;
+      border-radius: 1.2rem 1.2rem 0 0;
+      border-bottom: 1px solid #f1f5f9;
+      padding: 1.2rem 1.5rem;
+    }
+    .table {
+      background: #fff;
+      border-radius: 0 0 1.2rem 1.2rem;
+      overflow: hidden;
+    }
+    .table thead {
+      background: linear-gradient(90deg, #6366f1 0%, #10b981 100%);
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .table tbody tr {
+      transition: background 0.2s;
+    }
+    .table tbody tr:hover {
+      background: #f0fdf4;
+    }
+    .btn-outline-success, .btn-outline-danger {
+      border-radius: 6px;
+      font-weight: 500;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .btn-outline-success:hover {
+      background: #10b981;
+      color: #fff;
+      border-color: #10b981;
+      box-shadow: 0 2px 8px #10b98133;
+      transform: scale(1.05);
+    }
+    .btn-outline-danger:hover {
+      background: #ef4444;
+      color: #fff;
+      border-color: #ef4444;
+      box-shadow: 0 2px 8px #ef444433;
+      transform: scale(1.05);
+    }
+    .table th, .table td {
+      vertical-align: middle;
+    }
+    .table th {
+      font-size: 1.05rem;
+    }
+    .table td {
+      font-size: 1rem;
+    }
+    .text-center.py-5 img {
+      filter: drop-shadow(0 2px 8px #10b98133);
+    }
+    .text-center.py-5 h5 {
+      color: #6366f1;
+      font-weight: 600;
+    }
+    .text-center.py-5 p {
+      color: #7c3aed;
+      font-size: 1.08rem;
+    }
+    @media (max-width: 600px) {
+      .banner { border-radius: 0.7rem; padding: 1.2rem 0.5rem; }
+      .card-header { border-radius: 0.7rem 0.7rem 0 0; padding: 0.7rem 0.7rem; }
+      .table { border-radius: 0 0 0.7rem 0.7rem; }
     }
   </style>
   <script>

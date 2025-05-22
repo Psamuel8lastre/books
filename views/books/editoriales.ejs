@@ -4,7 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Editoriales</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
   <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <body>
@@ -131,44 +133,38 @@
         </script>
       <% } %>
       <% if (data.length) { %>
-        <div class="autores-table table-responsive">
-          <table class="table table-hover">
-            <thead class="table-light">
-              <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>País</th>
-                <th>Creado</th>
-                <th>Actualizado</th>
-                <th class="text-center">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% data.forEach(function(editorial, i) { %>
-                <tr>
-                  <td><%= i+1 %></td>
-                  <td><%= editorial.name %></td>
-                  <td><%= editorial.country || '-' %></td>
-                  <td><%= editorial.created_at ? editorial.created_at.toLocaleString ? editorial.created_at.toLocaleString() : editorial.created_at : '-' %></td>
-                  <td><%= editorial.updated_at ? editorial.updated_at.toLocaleString ? editorial.updated_at.toLocaleString() : editorial.updated_at : '-' %></td>
-                  <td class="text-center">
-                    <a href="/editoriales/edit/<%= editorial.id %>" class="btn btn-sm btn-outline-success me-2">
-                      <i class="fas fa-edit"></i> Editar
-                    </a>
-                    <a href="/editoriales/delete/<%= editorial.id %>" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Estás seguro?')">
-                      <i class="fas fa-trash-alt"></i> Eliminar
-                    </a>
-                  </td>
-                </tr>
-              <% }); %>
-            </tbody>
-          </table>
+        <div class="editoriales-cards-list row g-4 animate-fade-in">
+          <% data.forEach(function(editorial, i) { 
+            var gradClass = 'editorial-gradient-' + ((i%6)+1); 
+          %>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div class="editorial-card card h-100 text-center p-3 border-0 shadow-sm <%= gradClass %>">
+                <div class="editorial-card-icon mx-auto mb-3">
+                  <span class="editorial-avatar-circle">
+                    <i class="fas fa-building"></i>
+                  </span>
+                </div>
+                <h5 class="fw-bold mb-1 editorial-card-title"><%= editorial.name %></h5>
+                <div class="text-muted mb-1 editorial-card-country"><i class="fas fa-flag me-1"></i> <%= editorial.country || '-' %></div>
+                <div class="text-secondary mb-1 editorial-card-created" style="font-size:0.93rem"><i class="fas fa-calendar-plus me-1"></i> <%= editorial.created_at ? editorial.created_at.toLocaleString ? editorial.created_at.toLocaleString() : editorial.created_at : '-' %></div>
+                <div class="text-secondary mb-2 editorial-card-updated" style="font-size:0.93rem"><i class="fas fa-calendar-check me-1"></i> <%= editorial.updated_at ? editorial.updated_at.toLocaleString ? editorial.updated_at.toLocaleString() : editorial.updated_at : '-' %></div>
+                <div class="d-flex justify-content-center gap-2 mt-auto editorial-card-actions">
+                  <a href="/editoriales/edit/<%= editorial.id %>" class="btn btn-sm btn-outline-success px-3 editorial-btn-edit">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <a href="/editoriales/delete/<%= editorial.id %>" class="btn btn-sm btn-outline-danger px-3 editorial-btn-delete" onclick="return confirm('¿Estás seguro?')">
+                    <i class="fas fa-trash-alt"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          <% }); %>
         </div>
       <% } else { %>
-        <div class="text-center py-5">
-          <img src="https://cdn-icons-png.flaticon.com/512/2748/2748558.png" width="100" class="mb-3 opacity-50">
-          <h5 class="text-muted">No hay editoriales registradas</h5>
-          <a href="/editoriales/add" class="btn btn-primary mt-3">
+        <div class="text-center py-5 editorial-empty">
+          <img src="https://cdn-icons-png.flaticon.com/512/2748/2748558.png" width="100" class="mb-3 opacity-50 editorial-empty-img">
+          <h5 class="text-muted editorial-empty-title">No hay editoriales registradas</h5>
+          <a href="/editoriales/add" class="btn btn-primary mt-3 editorial-btn-add">
             <i class="fas fa-plus-circle"></i> Agregar Editorial
           </a>
         </div>
