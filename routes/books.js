@@ -15,23 +15,50 @@ router.get('/', async (req, res) => {
 
 // Formulario agregar
 router.get('/add', (req, res) => {
-  res.render('books/add', { name: '', author: '' });
+  res.render('books/add', {
+    isbn: '',
+    name: '',
+    author: '',
+    editorial: '',
+    year: '',
+    pages: '',
+    copies: '',
+    category: '',
+    messages: { fieldErrors: {} }
+  });
 });
 
 // Agregar libro
 router.post('/add', async (req, res) => {
-  const { name, author } = req.body;
-  if (!name || !author) {
-    req.flash('error', 'Todos los campos son requeridos');
-    return res.render('books/add', { name, author });
+  const { isbn, name, author, editorial, year, pages, copies, category } = req.body;
+  let fieldErrors = {};
+  if (!isbn) fieldErrors.isbn = 'El ISBN es requerido';
+  if (!name) fieldErrors.name = 'El título es requerido';
+  if (!author) fieldErrors.author = 'El autor es requerido';
+  if (!editorial) fieldErrors.editorial = 'La editorial es requerida';
+  if (!year) fieldErrors.year = 'El año es requerido';
+  if (!pages) fieldErrors.pages = 'El número de páginas es requerido';
+  if (!copies) fieldErrors.copies = 'El número de ejemplares es requerido';
+  if (!category) fieldErrors.category = 'La categoría es requerida';
+  if (Object.keys(fieldErrors).length > 0) {
+    return res.render('books/add', {
+      isbn, name, author, editorial, year, pages, copies, category,
+      messages: { fieldErrors }
+    });
   }
   try {
-    await db.query('INSERT INTO books (name, author) VALUES (?, ?)', [name, author]);
+    await db.query(
+      'INSERT INTO books (isbn, name, author, editorial, year, pages, copies, category) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+      [isbn, name, author, editorial, year, pages, copies, category]
+    );
     req.flash('success', 'Libro agregado');
     res.redirect('/books');
   } catch (err) {
     req.flash('error', err.message);
-    res.render('books/add', { name, author });
+    res.render('books/add', {
+      isbn, name, author, editorial, year, pages, copies, category,
+      messages: { fieldErrors }
+    });
   }
 });
 
@@ -43,7 +70,7 @@ router.get('/edit/:id', async (req, res) => {
       req.flash('error', 'Libro no encontrado');
       return res.redirect('/books');
     }
-    res.render('books/edit', rows[0]);
+    res.render('books/edit', { ...rows[0], messages: { fieldErrors: {} } });
   } catch (err) {
     req.flash('error', err.message);
     res.redirect('/books');
@@ -52,14 +79,37 @@ router.get('/edit/:id', async (req, res) => {
 
 // Actualizar libro
 router.post('/update/:id', async (req, res) => {
-  const { name, author } = req.body;
+  const { isbn, name, author, editorial, year, pages, copies, category } = req.body;
+  let fieldErrors = {};
+  if (!isbn) fieldErrors.isbn = 'El ISBN es requerido';
+  if (!name) fieldErrors.name = 'El título es requerido';
+  if (!author) fieldErrors.author = 'El autor es requerido';
+  if (!editorial) fieldErrors.editorial = 'La editorial es requerida';
+  if (!year) fieldErrors.year = 'El año es requerido';
+  if (!pages) fieldErrors.pages = 'El número de páginas es requerido';
+  if (!copies) fieldErrors.copies = 'El número de ejemplares es requerido';
+  if (!category) fieldErrors.category = 'La categoría es requerida';
+  if (Object.keys(fieldErrors).length > 0) {
+    return res.render('books/edit', {
+      id: req.params.id,
+      isbn, name, author, editorial, year, pages, copies, category,
+      messages: { fieldErrors }
+    });
+  }
   try {
-    await db.query('UPDATE books SET name = ?, author = ? WHERE id = ?', [name, author, req.params.id]);
+    await db.query(
+      'UPDATE books SET isbn = ?, name = ?, author = ?, editorial = ?, year = ?, pages = ?, copies = ?, category = ? WHERE id = ?',
+      [isbn, name, author, editorial, year, pages, copies, category, req.params.id]
+    );
     req.flash('success', 'Libro actualizado');
     res.redirect('/books');
   } catch (err) {
     req.flash('error', err.message);
-    res.redirect('/books');
+    res.render('books/edit', {
+      id: req.params.id,
+      isbn, name, author, editorial, year, pages, copies, category,
+      messages: { fieldErrors }
+    });
   }
 });
 

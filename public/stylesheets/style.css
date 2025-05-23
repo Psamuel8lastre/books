@@ -76,7 +76,7 @@ body {
       background: var(--primary);
     }
     .navbar{
-       background: var(--dark);
+       background: #312E81;
       color: white;
       transition: all 0.3s;
     }
@@ -441,7 +441,7 @@ body {
 
 /* Footer Styles */
 .app-footer {
-  background-color: var(--dark);
+  background-color: #312E81 !important;
   color: white;
   padding: 3rem 0 0;
   margin-top: 3rem;
