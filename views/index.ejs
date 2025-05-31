@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
   <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/index.css">
   <link rel="icon" href="images/bibiotecalogo-removebg-preview.png" type="image/x-icon">
 </head>
 <body>
@@ -111,52 +112,6 @@
             </div>
           </div>
         <% } %>
-        <style>
-        #floating-alert.custom-alert {
-          position: fixed;
-          top: 32px;
-          right: 32px;
-          z-index: 2000;
-          margin: 0;
-          min-width: 320px;
-          max-width: 420px;
-          opacity: 0.98;
-          animation: fadeInDown 0.7s;
-        }
-        @media (max-width: 600px) {
-          #floating-alert.custom-alert {
-            right: 10px;
-            top: 10px;
-            min-width: 200px;
-            max-width: 95vw;
-          }
-        }
-        @keyframes fadeInDown {
-          from { opacity: 0; transform: translateY(-30px); }
-          to { opacity: 0.98; transform: translateY(0); }
-        }
-        .custom-alert {
-          border-radius: 12px;
-          padding: 1rem 1.5rem;
-          font-size: 1.08rem;
-          font-weight: 500;
-          box-shadow: 0 4px 18px rgba(0,0,0,0.07);
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-          transition: opacity 0.5s, top 0.5s;
-        }
-        .custom-alert-danger {
-          background: #fee2e2;
-          color: #b91c1c;
-          border-left: 6px solid #ef4444;
-        }
-        .custom-alert-success {
-          background: #d1fae5;
-          color: #065f46;
-          border-left: 6px solid #10b981;
-        }
-        </style>
         <script>
         document.addEventListener('DOMContentLoaded', function() {
           const alert = document.getElementById('floating-alert');
@@ -172,42 +127,50 @@
         <!-- Stats Cards -->
         <div class="row mb-4">
           <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card stats-card h-100">
-              <div class="card-body text-center">
-                <div class="icon-bg mb-2"><i class="fas fa-book"></i></div>
-                <div class="stat-label">Libros Disponibles</div>
-                <div class="stat-value"><%= typeof totalLibros !== 'undefined' ? totalLibros : 0 %></div>
-                <div class="stat-extra">en catálogo</div>
+            <div class="card stats-card h-100 shadow border-0 bg-gradient-primary text-white animate__animated animate__fadeInUp" style="border-radius: 18px; background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%); box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);">
+              <div class="card-body text-center py-4">
+                <div class="icon-bg mb-3" style="background:rgba(255,255,255,0.15); border-radius:50%; width:60px; height:60px; display:flex; align-items:center; justify-content:center; margin:0 auto;">
+                  <i class="fas fa-book fa-2x"></i>
+                </div>
+                <div class="stat-label mb-1" style="font-size:1.1rem; font-weight:600; letter-spacing:1px;">Libros Disponibles</div>
+                <div class="stat-value mb-1" style="font-size:2.2rem; font-weight:700;"> <%= typeof totalLibros !== 'undefined' ? totalLibros : 0 %></div>
+                <div class="stat-extra" style="font-size:0.95rem; opacity:0.85;">en catálogo</div>
               </div>
             </div>
           </div>
           <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card stats-card h-100">
-              <div class="card-body text-center">
-                <div class="icon-bg mb-2" style="background:linear-gradient(135deg,#22c55e 60%,#bef264 100%)"><i class="fas fa-exchange-alt"></i></div>
-                <div class="stat-label" style="color:#22c55e">Préstamos Activos</div>
-                <div class="stat-value"><%= typeof prestamosActivos !== 'undefined' ? prestamosActivos : 0 %></div>
-                <div class="stat-extra">en curso</div>
+            <div class="card stats-card h-100 shadow border-0 bg-gradient-success text-white animate__animated animate__fadeInUp" style="border-radius: 18px; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); box-shadow: 0 8px 32px 0 rgba(16, 185, 129, 0.25);">
+              <div class="card-body text-center py-4">
+                <div class="icon-bg mb-3" style="background:rgba(255,255,255,0.15); border-radius:50%; width:60px; height:60px; display:flex; align-items:center; justify-content:center; margin:0 auto;">
+                  <i class="fas fa-exchange-alt fa-2x"></i>
+                </div>
+                <div class="stat-label mb-1" style="font-size:1.1rem; font-weight:600; letter-spacing:1px;">Préstamos Activos</div>
+                <div class="stat-value mb-1" style="font-size:2.2rem; font-weight:700;"> <%= typeof prestamosActivos !== 'undefined' ? prestamosActivos : 0 %></div>
+                <div class="stat-extra" style="font-size:0.95rem; opacity:0.85;">en curso</div>
               </div>
             </div>
           </div>
           <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card stats-card h-100">
-              <div class="card-body text-center">
-                <div class="icon-bg mb-2" style="background:linear-gradient(135deg,#f59e42 60%,#fde68a 100%)"><i class="fas fa-exclamation-triangle"></i></div>
-                <div class="stat-label" style="color:#f59e42">Préstamos Vencidos</div>
-                <div class="stat-value"><%= typeof prestamosVencidos !== 'undefined' ? prestamosVencidos : 0 %></div>
-                <div class="stat-extra">requieren atención</div>
+            <div class="card stats-card h-100 shadow border-0 bg-gradient-warning text-white animate__animated animate__fadeInUp" style="border-radius: 18px; background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%); box-shadow: 0 8px 32px 0 rgba(247, 151, 30, 0.25);">
+              <div class="card-body text-center py-4">
+                <div class="icon-bg mb-3" style="background:rgba(255,255,255,0.15); border-radius:50%; width:60px; height:60px; display:flex; align-items:center; justify-content:center; margin:0 auto;">
+                  <i class="fas fa-exclamation-triangle fa-2x"></i>
+                </div>
+                <div class="stat-label mb-1" style="font-size:1.1rem; font-weight:600; letter-spacing:1px;">Préstamos Vencidos</div>
+                <div class="stat-value mb-1" style="font-size:2.2rem; font-weight:700;"> <%= typeof prestamosVencidos !== 'undefined' ? prestamosVencidos : 0 %></div>
+                <div class="stat-extra" style="font-size:0.95rem; opacity:0.85;">requieren atención</div>
               </div>
             </div>
           </div>
           <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card stats-card h-100">
-              <div class="card-body text-center">
-                <div class="icon-bg mb-2" style="background:linear-gradient(135deg,#0ea5e9 60%,#a5b4fc 100%)"><i class="fas fa-pen-fancy"></i></div>
-                <div class="stat-label" style="color:#0ea5e9">Autores Registrados</div>
-                <div class="stat-value"><%= typeof totalAutores !== 'undefined' ? totalAutores : 0 %></div>
-                <div class="stat-extra">en sistema</div>
+            <div class="card stats-card h-100 shadow border-0 bg-gradient-info text-white animate__animated animate__fadeInUp" style="border-radius: 18px; background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%); box-shadow: 0 8px 32px 0 rgba(24, 90, 157, 0.25);">
+              <div class="card-body text-center py-4">
+                <div class="icon-bg mb-3" style="background:rgba(255,255,255,0.15); border-radius:50%; width:60px; height:60px; display:flex; align-items:center; justify-content:center; margin:0 auto;">
+                  <i class="fas fa-pen-fancy fa-2x"></i>
+                </div>
+                <div class="stat-label mb-1" style="font-size:1.1rem; font-weight:600; letter-spacing:1px;">Autores Registrados</div>
+                <div class="stat-value mb-1" style="font-size:2.2rem; font-weight:700;"> <%= typeof totalAutores !== 'undefined' ? totalAutores : 0 %></div>
+                <div class="stat-extra" style="font-size:0.95rem; opacity:0.85;">en sistema</div>
               </div>
             </div>
           </div>

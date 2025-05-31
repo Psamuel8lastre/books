@@ -14,18 +14,42 @@ router.get('/', async (req, res) => {
 });
 
 // Formulario agregar
-router.get('/add', (req, res) => {
-  res.render('books/add', {
-    isbn: '',
-    name: '',
-    author: '',
-    editorial: '',
-    year: '',
-    pages: '',
-    copies: '',
-    category: '',
-    messages: { fieldErrors: {} }
-  });
+router.get('/add', async (req, res) => {
+  try {
+    const [categorias] = await db.query('SELECT * FROM categorias ORDER BY name ASC');
+    const [autores] = await db.query('SELECT DISTINCT name FROM autores ORDER BY name ASC');
+    const [editoriales] = await db.query('SELECT * FROM editoriales ORDER BY name ASC');
+    res.render('books/add', {
+      isbn: '',
+      name: '',
+      author: '',
+      editorial: '',
+      year: '',
+      pages: '',
+      copies: '',
+      category: '',
+      categorias,
+      autores,
+      editoriales,
+      messages: { fieldErrors: {} }
+    });
+  } catch (err) {
+    req.flash('error', 'No se pudieron cargar las categorías, autores o editoriales');
+    res.render('books/add', {
+      isbn: '',
+      name: '',
+      author: '',
+      editorial: '',
+      year: '',
+      pages: '',
+      copies: '',
+      category: '',
+      categorias: [],
+      autores: [],
+      editoriales: [],
+      messages: { fieldErrors: {} }
+    });
+  }
 });
 
 // Agregar libro
@@ -41,8 +65,15 @@ router.post('/add', async (req, res) => {
   if (!copies) fieldErrors.copies = 'El número de ejemplares es requerido';
   if (!category) fieldErrors.category = 'La categoría es requerida';
   if (Object.keys(fieldErrors).length > 0) {
+    // Volver a cargar las categorías, autores y editoriales si hay errores de validación
+    const [categorias] = await db.query('SELECT * FROM categorias ORDER BY name ASC');
+    const [autores] = await db.query('SELECT DISTINCT name FROM autores ORDER BY name ASC');
+    const [editoriales] = await db.query('SELECT * FROM editoriales ORDER BY name ASC');
     return res.render('books/add', {
       isbn, name, author, editorial, year, pages, copies, category,
+      categorias,
+      autores,
+      editoriales,
       messages: { fieldErrors }
     });
   }
@@ -55,8 +86,15 @@ router.post('/add', async (req, res) => {
     res.redirect('/books');
   } catch (err) {
     req.flash('error', err.message);
+    // Volver a cargar las categorías, autores y editoriales si hay error de base de datos
+    const [categorias] = await db.query('SELECT * FROM categorias ORDER BY name ASC');
+    const [autores] = await db.query('SELECT DISTINCT name FROM autores ORDER BY name ASC');
+    const [editoriales] = await db.query('SELECT * FROM editoriales ORDER BY name ASC');
     res.render('books/add', {
       isbn, name, author, editorial, year, pages, copies, category,
+      categorias,
+      autores,
+      editoriales,
       messages: { fieldErrors }
     });
   }
@@ -66,11 +104,13 @@ router.post('/add', async (req, res) => {
 router.get('/edit/:id', async (req, res) => {
   try {
     const [rows] = await db.query('SELECT * FROM books WHERE id = ?', [req.params.id]);
+    const [autores] = await db.query('SELECT DISTINCT name FROM autores ORDER BY name ASC');
+    const [editoriales] = await db.query('SELECT DISTINCT editorial FROM books WHERE editorial IS NOT NULL AND editorial <> "" ORDER BY editorial ASC');
     if (rows.length === 0) {
       req.flash('error', 'Libro no encontrado');
       return res.redirect('/books');
     }
-    res.render('books/edit', { ...rows[0], messages: { fieldErrors: {} } });
+    res.render('books/edit', { ...rows[0], autores, editoriales, messages: { fieldErrors: {} } });
   } catch (err) {
     req.flash('error', err.message);
     res.redirect('/books');
@@ -90,9 +130,13 @@ router.post('/update/:id', async (req, res) => {
   if (!copies) fieldErrors.copies = 'El número de ejemplares es requerido';
   if (!category) fieldErrors.category = 'La categoría es requerida';
   if (Object.keys(fieldErrors).length > 0) {
+    const [autores] = await db.query('SELECT DISTINCT name FROM autores ORDER BY name ASC');
+    const [editoriales] = await db.query('SELECT DISTINCT editorial FROM books WHERE editorial IS NOT NULL AND editorial <> "" ORDER BY editorial ASC');
     return res.render('books/edit', {
       id: req.params.id,
       isbn, name, author, editorial, year, pages, copies, category,
+      autores,
+      editoriales,
       messages: { fieldErrors }
     });
   }
@@ -105,9 +149,13 @@ router.post('/update/:id', async (req, res) => {
     res.redirect('/books');
   } catch (err) {
     req.flash('error', err.message);
+    const [autores] = await db.query('SELECT DISTINCT name FROM autores ORDER BY name ASC');
+    const [editoriales] = await db.query('SELECT DISTINCT editorial FROM books WHERE editorial IS NOT NULL AND editorial <> "" ORDER BY editorial ASC');
     res.render('books/edit', {
       id: req.params.id,
       isbn, name, author, editorial, year, pages, copies, category,
+      autores,
+      editoriales,
       messages: { fieldErrors }
     });
   }

@@ -133,9 +133,36 @@
             <span class="input-group-text"><i class="fas fa-user-pen"></i></span>
             <input type="text" class="form-control <%= messages.fieldErrors?.author ? 'is-invalid' : '' %>" 
                    name="author" value="<%= author %>" autocomplete="off" list="authors" required>
+            <datalist id="authors">
+              <% if (autores && autores.length) { %>
+                <% autores.forEach(function(a) { %>
+                  <option value="<%= a.name %>"></option>
+                <% }) %>
+              <% } %>
+            </datalist>
             <% if (messages.fieldErrors?.author) { %>
               <div class="invalid-feedback">
                 <%= messages.fieldErrors.author %>
+              </div>
+            <% } %>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">Editorial:</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-building"></i></span>
+            <select class="form-control <%= messages.fieldErrors?.editorial ? 'is-invalid' : '' %>" name="editorial" required>
+              <option value="">Selecciona una editorial</option>
+              <% if (editoriales && editoriales.length) { %>
+                <% editoriales.forEach(function(ed) { %>
+                  <option value="<%= ed.editorial %>" <%= editorial === ed.editorial ? 'selected' : '' %>><%= ed.editorial %></option>
+                <% }) %>
+              <% } %>
+            </select>
+            <% if (messages.fieldErrors?.editorial) { %>
+              <div class="invalid-feedback">
+                <%= messages.fieldErrors.editorial %>
               </div>
             <% } %>
           </div>

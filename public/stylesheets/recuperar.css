@@ -1,0 +1,37 @@
+:root {
+  --primary-color: #4e73df;
+  --gradient: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+}
+body {
+  background-color: #f8f9fc;
+  height: 100vh;
+}
+.recovery-container {
+  max-width: 400px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+.recovery-header {
+  background: var(--gradient);
+  padding: 30px;
+  color: white;
+  text-align: center;
+}
+.recovery-body {
+  padding: 30px;
+  background: white;
+}
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.25rem rgba(78, 115, 223, 0.25);
+}
+.btn-recovery {
+  background: var(--gradient);
+  border: none;
+  transition: all 0.3s;
+}
+.btn-recovery:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(78, 115, 223, 0.4);
+}
