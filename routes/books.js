@@ -18,7 +18,7 @@ router.get('/add', async (req, res) => {
   try {
     const [categorias] = await db.query('SELECT * FROM categorias ORDER BY name ASC');
     const [autores] = await db.query('SELECT DISTINCT name FROM autores ORDER BY name ASC');
-    const [editoriales] = await db.query('SELECT * FROM editoriales ORDER BY name ASC');
+    const [editoriales] = await db.query('SELECT DISTINCT editorial FROM books WHERE editorial IS NOT NULL AND editorial <> "" ORDER BY editorial ASC');
     res.render('books/add', {
       isbn: '',
       name: '',
@@ -68,7 +68,7 @@ router.post('/add', async (req, res) => {
     // Volver a cargar las categorías, autores y editoriales si hay errores de validación
     const [categorias] = await db.query('SELECT * FROM categorias ORDER BY name ASC');
     const [autores] = await db.query('SELECT DISTINCT name FROM autores ORDER BY name ASC');
-    const [editoriales] = await db.query('SELECT * FROM editoriales ORDER BY name ASC');
+    const [editoriales] = await db.query('SELECT DISTINCT editorial FROM books WHERE editorial IS NOT NULL AND editorial <> "" ORDER BY editorial ASC');
     return res.render('books/add', {
       isbn, name, author, editorial, year, pages, copies, category,
       categorias,
@@ -89,7 +89,7 @@ router.post('/add', async (req, res) => {
     // Volver a cargar las categorías, autores y editoriales si hay error de base de datos
     const [categorias] = await db.query('SELECT * FROM categorias ORDER BY name ASC');
     const [autores] = await db.query('SELECT DISTINCT name FROM autores ORDER BY name ASC');
-    const [editoriales] = await db.query('SELECT * FROM editoriales ORDER BY name ASC');
+    const [editoriales] = await db.query('SELECT DISTINCT editorial FROM books WHERE editorial IS NOT NULL AND editorial <> "" ORDER BY editorial ASC');
     res.render('books/add', {
       isbn, name, author, editorial, year, pages, copies, category,
       categorias,

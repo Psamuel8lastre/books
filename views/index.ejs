@@ -127,54 +127,48 @@
         <!-- Stats Cards -->
         <div class="row mb-4">
           <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card stats-card h-100 shadow border-0 bg-gradient-primary text-white animate__animated animate__fadeInUp" style="border-radius: 18px; background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%); box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);">
-              <div class="card-body text-center py-4">
-                <div class="icon-bg mb-3" style="background:rgba(255,255,255,0.15); border-radius:50%; width:60px; height:60px; display:flex; align-items:center; justify-content:center; margin:0 auto;">
-                  <i class="fas fa-book fa-2x"></i>
-                </div>
-                <div class="stat-label mb-1" style="font-size:1.1rem; font-weight:600; letter-spacing:1px;">Libros Disponibles</div>
-                <div class="stat-value mb-1" style="font-size:2.2rem; font-weight:700;"> <%= typeof totalLibros !== 'undefined' ? totalLibros : 0 %></div>
-                <div class="stat-extra" style="font-size:0.95rem; opacity:0.85;">en catálogo</div>
+            <div class="card stats-card h-100">
+              <div class="card-body text-center">
+                <div class="icon-bg mb-2"><i class="fas fa-book"></i></div>
+                <div class="stat-label">Libros Disponibles</div>
+                <div class="stat-value"><%= typeof totalLibros !== 'undefined' ? totalLibros : 0 %></div>
+                <div class="stat-extra">en catálogo</div>
               </div>
             </div>
           </div>
           <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card stats-card h-100 shadow border-0 bg-gradient-success text-white animate__animated animate__fadeInUp" style="border-radius: 18px; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); box-shadow: 0 8px 32px 0 rgba(16, 185, 129, 0.25);">
-              <div class="card-body text-center py-4">
-                <div class="icon-bg mb-3" style="background:rgba(255,255,255,0.15); border-radius:50%; width:60px; height:60px; display:flex; align-items:center; justify-content:center; margin:0 auto;">
-                  <i class="fas fa-exchange-alt fa-2x"></i>
-                </div>
-                <div class="stat-label mb-1" style="font-size:1.1rem; font-weight:600; letter-spacing:1px;">Préstamos Activos</div>
-                <div class="stat-value mb-1" style="font-size:2.2rem; font-weight:700;"> <%= typeof prestamosActivos !== 'undefined' ? prestamosActivos : 0 %></div>
-                <div class="stat-extra" style="font-size:0.95rem; opacity:0.85;">en curso</div>
+            <div class="card stats-card h-100">
+              <div class="card-body text-center">
+                <div class="icon-bg mb-2" style="background:linear-gradient(135deg,#22c55e 60%,#bef264 100%)"><i class="fas fa-exchange-alt"></i></div>
+                <div class="stat-label" style="color:#22c55e">Préstamos Activos</div>
+                <div class="stat-value"><%= typeof prestamosActivos !== 'undefined' ? prestamosActivos : 0 %></div>
+                <div class="stat-extra">en curso</div>
               </div>
             </div>
           </div>
           <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card stats-card h-100 shadow border-0 bg-gradient-warning text-white animate__animated animate__fadeInUp" style="border-radius: 18px; background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%); box-shadow: 0 8px 32px 0 rgba(247, 151, 30, 0.25);">
-              <div class="card-body text-center py-4">
-                <div class="icon-bg mb-3" style="background:rgba(255,255,255,0.15); border-radius:50%; width:60px; height:60px; display:flex; align-items:center; justify-content:center; margin:0 auto;">
-                  <i class="fas fa-exclamation-triangle fa-2x"></i>
-                </div>
-                <div class="stat-label mb-1" style="font-size:1.1rem; font-weight:600; letter-spacing:1px;">Préstamos Vencidos</div>
-                <div class="stat-value mb-1" style="font-size:2.2rem; font-weight:700;"> <%= typeof prestamosVencidos !== 'undefined' ? prestamosVencidos : 0 %></div>
-                <div class="stat-extra" style="font-size:0.95rem; opacity:0.85;">requieren atención</div>
+            <div class="card stats-card h-100">
+              <div class="card-body text-center">
+                <div class="icon-bg mb-2" style="background:linear-gradient(135deg,#f59e42 60%,#fde68a 100%)"><i class="fas fa-exclamation-triangle"></i></div>
+                <div class="stat-label" style="color:#f59e42">Préstamos Vencidos</div>
+                <div class="stat-value"><%= typeof prestamosVencidos !== 'undefined' ? prestamosVencidos : 0 %></div>
+                <div class="stat-extra">requieren atención</div>
               </div>
             </div>
           </div>
           <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card stats-card h-100 shadow border-0 bg-gradient-info text-white animate__animated animate__fadeInUp" style="border-radius: 18px; background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%); box-shadow: 0 8px 32px 0 rgba(24, 90, 157, 0.25);">
-              <div class="card-body text-center py-4">
-                <div class="icon-bg mb-3" style="background:rgba(255,255,255,0.15); border-radius:50%; width:60px; height:60px; display:flex; align-items:center; justify-content:center; margin:0 auto;">
-                  <i class="fas fa-pen-fancy fa-2x"></i>
-                </div>
-                <div class="stat-label mb-1" style="font-size:1.1rem; font-weight:600; letter-spacing:1px;">Autores Registrados</div>
-                <div class="stat-value mb-1" style="font-size:2.2rem; font-weight:700;"> <%= typeof totalAutores !== 'undefined' ? totalAutores : 0 %></div>
-                <div class="stat-extra" style="font-size:0.95rem; opacity:0.85;">en sistema</div>
+            <div class="card stats-card h-100">
+              <div class="card-body text-center">
+                <div class="icon-bg mb-2" style="background:linear-gradient(135deg,#0ea5e9 60%,#a5b4fc 100%)"><i class="fas fa-pen-fancy"></i></div>
+                <div class="stat-label" style="color:#0ea5e9">Autores Registrados</div>
+                <div class="stat-value"><%= typeof totalAutores !== 'undefined' ? totalAutores : 0 %></div>
+                <div class="stat-extra">en sistema</div>
               </div>
             </div>
           </div>
         </div>
+
+        
 
      <!-- Sección: Catálogo de Libros con Búsqueda Avanzada -->
 <div id="libros" class="card shadow mb-5">
@@ -182,108 +176,74 @@
     <h5 class="mb-0 text-primary">
       <i class="fas fa-book me-2"></i>Catálogo de Libros
     </h5>
-    
   </div>
   <div class="card-body">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
-      <!-- Tarjeta de Libro -->
-      <div class="col">
-        <div class="card h-100 shadow-sm">
-          <div class="position-relative">
-            <img src="/images/artedela geurra.gif" 
-                 class="card-img-top rounded-top" style="height: 200px; object-fit: cover">
-            <span class="position-absolute top-0 end-0 m-2 badge bg-success">Estrategia</span>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">El arte de la guerra</h5>
-            <p class="card-text text-muted"> Sun Tzu</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <span class="badge bg-success">Disponible</span>
-              <div class="btn-group btn-group-sm">
-                <button class="btn btn-outline-primary" title="Ver detalle">
-                  <i class="fas fa-eye"></i>
-                </button>
+    <% var libros = typeof libros !== 'undefined' ? libros : []; %>
+    <% function chunk(array, size) {
+      var results = [];
+      for (var i = 0; i < array.length; i += size) {
+        results.push(array.slice(i, i + size));
+      }
+      return results;
+    } %>
+    <% if (libros && libros.length > 0) { %>
+      <div id="catalogoCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+        <div class="carousel-inner">
+          <% chunk(libros, 4).forEach(function(grupo, idx) { %>
+            <div class="carousel-item <%= idx === 0 ? 'active' : '' %>">
+              <div class="row justify-content-center">
+                <% grupo.forEach(function(libro) { %>
+                  <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex align-items-stretch">
+                    <div class="card h-100 shadow-sm m-2" style="width: 100%; min-width: 220px; max-width: 260px;">
+                      <div class="position-relative">
+                        <% let imgFile = libro.name && libro.name.toLowerCase().includes('guerra') ? 'artedela geurra.gif' :
+                                        libro.name && libro.name.toLowerCase().includes('soledad') ? 'logo1cienañosdesoledad.avif' :
+                                        libro.name && libro.name.toLowerCase().includes('harry') ? 'harrypotter.jpeg' :
+                                        libro.name && libro.name.toLowerCase().includes('1984') ? 'logo1984.jpg' :
+                                        'bibiotecalogo-removebg-preview.png'; %>
+                        <img src="/images/<%= imgFile %>" class="card-img-top rounded-top" style="height: 200px; object-fit: cover">
+                        <span class="position-absolute top-0 end-0 m-2 badge bg-info"><%= libro.category || 'Sin categoría' %></span>
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title"><%= libro.name %></h5>
+                        <p class="card-text text-muted"><%= libro.author %></p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <span class="badge <%= libro.copies > 0 ? 'bg-success' : 'bg-secondary' %>"><%= libro.copies > 0 ? 'Disponible' : 'Prestado' %></span>
+                          <div class="btn-group btn-group-sm">
+                            <button class="btn btn-outline-primary" title="Ver detalle">
+                              <i class="fas fa-eye"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% }); %>
               </div>
             </div>
-          </div>
+          <% }); %>
         </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#catalogoCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#catalogoCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Siguiente</span>
+        </button>
       </div>
-      
-      <div class="col">
-        <div class="card h-100 shadow-sm">
-          <div class="position-relative">
-            <img src="/images/logo1cienañosdesoledad.avif" 
-                 class="card-img-top rounded-top" style="height: 200px; object-fit: cover">
-            <span class="position-absolute top-0 end-0 m-2 badge bg-info">Novela</span>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">Cien años de soledad</h5>
-            <p class="card-text text-muted">Gabriel García Márquez</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <span class="badge bg-success">Disponible</span>
-              <div class="btn-group btn-group-sm">
-                <button class="btn btn-outline-primary" title="Ver detalle">
-                  <i class="fas fa-eye"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+    <% } else { %>
+      <div class="text-center py-5">
+        <img src="/images/bibiotecalogo-removebg-preview.png" width="100" class="mb-3 opacity-50">
+        <h5 class="text-muted">No hay libros registrados</h5>
+        <p class="text-muted">Comienza agregando tu primer libro</p>
+        <a href="/books/add" class="btn btn-primary">
+          <i class="fas fa-plus-circle"></i> Agregar Libro
+        </a>
       </div>
-
-      <div class="col">
-        <div class="card h-100 shadow-sm">
-          <div class="position-relative">
-            <img src="images/harrypotter.jpeg" 
-                 class="card-img-top rounded-top" style="height: 200px; object-fit: cover">
-            <span class="position-absolute top-0 end-0 m-2 badge bg-danger">Fantasía </span>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">Harry Potter</h5>
-            <p class="card-text text-muted"> J.K. Rowling</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <span class="badge bg-success">Disponible</span>
-              <div class="btn-group btn-group-sm">
-                <button class="btn btn-outline-primary" title="Ver detalle">
-                  <i class="fas fa-eye"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      
-      <div class="col">
-        <div class="card h-100 shadow-sm">
-          <div class="position-relative">
-            <img src="./images/logo1984.jpg" 
-                 class="card-img-top rounded-top" style="height: 200px; object-fit: cover">
-            <span class="position-absolute top-0 end-0 m-2 badge bg-warning text-dark">Ficción</span>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">1984</h5>
-            <p class="card-text text-muted">George Orwell</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <span class="badge bg-secondary">Prestado</span>
-              <div class="btn-group btn-group-sm">
-                <button class="btn btn-outline-primary" title="Ver detalle">
-                  <i class="fas fa-eye"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-
-                <!-- Contenido del historial -->
-              </div>
-              
-            </div>
-          </div>
-          
-        </div>
+    <% } %>
+  </div>
+</div>
         <div>
           <footer class="app-footer">
             <div class="footer-bottom">
@@ -351,6 +311,19 @@
         $('#newLoanModal .modal-title').text(`Préstamo: ${bookTitle}`);
       });
     });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var carousel = document.querySelector('#catalogoCarousel');
+      if (carousel) {
+        var bsCarousel = new bootstrap.Carousel(carousel, {
+          interval: 3000,
+          ride: 'carousel',
+          pause: false
+        });
+      }
+    });
   </script>
+
+  
 </body>
 </html>

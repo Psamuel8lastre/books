@@ -63,14 +63,19 @@
           <label class="form-label">Autor:</label>
           <div class="input-group">
             <span class="input-group-text"><i class="fas fa-user-pen"></i></span>
-            <select class="form-control <%= messages.fieldErrors?.author ? 'is-invalid' : '' %>" name="author" required>
-              <option value="">Selecciona un autor</option>
+            <input type="text" class="form-control <%= messages.fieldErrors?.author ? 'is-invalid' : '' %>" 
+                   name="author" value="<%= author %>" list="authors" placeholder="Selecciona o ingresa un autor" required>
+            <datalist id="authors">
               <% if (autores && autores.length) { %>
                 <% autores.forEach(function(autor) { %>
-                  <option value="<%= autor.name %>" <%= author === autor.name ? 'selected' : '' %>><%= autor.name %></option>
+                  <option value="<%= autor.name %>">
                 <% }) %>
+              <% } else { %>
+                <option value="J.K. Rowling">
+                <option value="George Orwell">
+                <option value="Jane Austen">
               <% } %>
-            </select>
+            </datalist>
             <% if (messages.fieldErrors?.author) { %>
               <div class="invalid-feedback">
                 <%= messages.fieldErrors.author %>
@@ -83,14 +88,14 @@
           <label class="form-label">Editorial:</label>
           <div class="input-group">
             <span class="input-group-text"><i class="fas fa-building"></i></span>
-            <select class="form-control <%= messages.fieldErrors?.editorial ? 'is-invalid' : '' %>" name="editorial" required>
-              <option value="">Selecciona una editorial</option>
+            <input type="text" class="form-control <%= messages.fieldErrors?.editorial ? 'is-invalid' : '' %>" name="editorial" value="<%= editorial %>" list="editoriales" placeholder="Editorial" required>
+            <datalist id="editoriales">
               <% if (editoriales && editoriales.length) { %>
                 <% editoriales.forEach(function(ed) { %>
-                  <option value="<%= ed.editorial ? ed.editorial : ed.name %>" <%= editorial === (ed.editorial ? ed.editorial : ed.name) ? 'selected' : '' %>><%= ed.editorial ? ed.editorial : ed.name %></option>
+                  <option value="<%= ed.name %>">
                 <% }) %>
               <% } %>
-            </select>
+            </datalist>
             <% if (messages.fieldErrors?.editorial) { %>
               <div class="invalid-feedback">
                 <%= messages.fieldErrors.editorial %>

@@ -15,8 +15,8 @@ router.get('/', async function(req, res, next) {
   }
   try {
     // Contar libros
-    const [books] = await db.query('SELECT COUNT(*) as total FROM books');
-    const totalLibros = books[0]?.total || 0;
+    const [booksCount] = await db.query('SELECT COUNT(*) as total FROM books');
+    const totalLibros = booksCount[0]?.total || 0;
     // Contar préstamos activos y vencidos
     const [prestamos] = await db.query('SELECT estado FROM prestamos');
     let prestamosActivos = 0;
@@ -28,18 +28,24 @@ router.get('/', async function(req, res, next) {
     // Contar autores
     const [autores] = await db.query('SELECT COUNT(*) as total FROM autores');
     const totalAutores = autores[0]?.total || 0;
+    // Obtener todos los libros para el catálogo
+    const [libros] = await db.query('SELECT * FROM books ORDER BY id DESC');
     res.render('index', {
       totalLibros,
       prestamosActivos,
       prestamosVencidos,
-      totalAutores
+      totalAutores,
+      libros,
+      user: req.session.user // asegurar que user siempre esté disponible
     });
   } catch (err) {
     res.render('index', {
       totalLibros: 0,
       prestamosActivos: 0,
       prestamosVencidos: 0,
-      totalAutores: 0
+      totalAutores: 0,
+      libros: [],
+      user: req.session.user
     });
   }
 });
