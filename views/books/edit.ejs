@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Editar Libro</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/stylesheets/add-book.css" rel="stylesheet">
   <style>
     body {
       background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -112,13 +113,26 @@
       <i class="fas fa-edit me-2"></i>Editar Libro
     </div>
     <div class="card-body p-4">
-      <form action="/books/update/<%= id %>" method="post" id="editForm">
+      <form action="/books/update/<%= id %>" method="post" id="bookForm" novalidate>
         <div class="mb-4">
-          <label class="form-label">Nombre del libro:</label>
+          <label class="form-label">ISBN:</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-barcode"></i></span>
+            <input type="text" class="form-control <%= messages.fieldErrors?.isbn ? 'is-invalid' : '' %>" name="isbn" value="<%= isbn %>" placeholder="ISBN del libro" required>
+            <% if (messages.fieldErrors?.isbn) { %>
+              <div class="invalid-feedback">
+                <%= messages.fieldErrors.isbn %>
+              </div>
+            <% } %>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">Título del Libro:</label>
           <div class="input-group">
             <span class="input-group-text"><i class="fas fa-heading"></i></span>
             <input type="text" class="form-control <%= messages.fieldErrors?.name ? 'is-invalid' : '' %>" 
-                   name="name" value="<%= name %>" autocomplete="off" required>
+                   name="name" value="<%= name %>" placeholder="Ingresa el título del libro" required>
             <% if (messages.fieldErrors?.name) { %>
               <div class="invalid-feedback">
                 <%= messages.fieldErrors.name %>
@@ -131,15 +145,14 @@
           <label class="form-label">Autor:</label>
           <div class="input-group">
             <span class="input-group-text"><i class="fas fa-user-pen"></i></span>
-            <input type="text" class="form-control <%= messages.fieldErrors?.author ? 'is-invalid' : '' %>" 
-                   name="author" value="<%= author %>" autocomplete="off" list="authors" required>
-            <datalist id="authors">
+            <select class="form-control <%= messages.fieldErrors?.author ? 'is-invalid' : '' %>" name="author" required>
+              <option value="">Selecciona un autor</option>
               <% if (autores && autores.length) { %>
-                <% autores.forEach(function(a) { %>
-                  <option value="<%= a.name %>"></option>
+                <% autores.forEach(function(autor) { %>
+                  <option value="<%= autor.name %>" <%= author === autor.name ? 'selected' : '' %>><%= autor.name %></option>
                 <% }) %>
               <% } %>
-            </datalist>
+            </select>
             <% if (messages.fieldErrors?.author) { %>
               <div class="invalid-feedback">
                 <%= messages.fieldErrors.author %>
@@ -156,7 +169,7 @@
               <option value="">Selecciona una editorial</option>
               <% if (editoriales && editoriales.length) { %>
                 <% editoriales.forEach(function(ed) { %>
-                  <option value="<%= ed.editorial %>" <%= editorial === ed.editorial ? 'selected' : '' %>><%= ed.editorial %></option>
+                  <option value="<%= ed.name %>" <%= editorial === ed.name ? 'selected' : '' %>><%= ed.name %></option>
                 <% }) %>
               <% } %>
             </select>
@@ -167,11 +180,71 @@
             <% } %>
           </div>
         </div>
+        <div class="mb-4">
+          <label class="form-label">Año de Publicación:</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-calendar-days"></i></span>
+            <input type="number" class="form-control <%= messages.fieldErrors?.year ? 'is-invalid' : '' %>" name="year" min="1000" max="<%= new Date().getFullYear() %>" value="<%= year %>" placeholder="Año de publicación" required>
+            <% if (messages.fieldErrors?.year) { %>
+              <div class="invalid-feedback">
+                <%= messages.fieldErrors.year %>
+              </div>
+            <% } %>
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="form-label">Número de Páginas:</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-file-alt"></i></span>
+            <input type="number" class="form-control <%= messages.fieldErrors?.pages ? 'is-invalid' : '' %>" name="pages" min="1" value="<%= pages %>" placeholder="Cantidad de páginas" required>
+            <% if (messages.fieldErrors?.pages) { %>
+              <div class="invalid-feedback">
+                <%= messages.fieldErrors.pages %>
+              </div>
+            <% } %>
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="form-label">Número de Ejemplares:</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-layer-group"></i></span>
+            <input type="number" class="form-control <%= messages.fieldErrors?.copies ? 'is-invalid' : '' %>" name="copies" min="1" value="<%= copies %>" placeholder="Ejemplares disponibles" required>
+            <% if (messages.fieldErrors?.copies) { %>
+              <div class="invalid-feedback">
+                <%= messages.fieldErrors.copies %>
+              </div>
+            <% } %>
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="form-label">Categoría:</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-tags"></i></span>
+            <select class="form-control <%= messages.fieldErrors?.category ? 'is-invalid' : '' %>" name="category" required>
+              <option value="">Selecciona una categoría</option>
+              <% if (categorias && categorias.length) { %>
+                <% categorias.forEach(function(cat) { %>
+                  <option value="<%= cat.name %>" <%= category === cat.name ? 'selected' : '' %>><%= cat.name %></option>
+                <% }) %>
+              <% } %>
+            </select>
+            <% if (messages.fieldErrors?.category) { %>
+              <div class="invalid-feedback">
+                <%= messages.fieldErrors.category %>
+              </div>
+            <% } %>
+          </div>
+        </div>
 
-        <button type="submit" class="btn btn-primary w-100">
-          <span class="spinner-border spinner-border-sm loading" role="status"></span>
-          <span class="submit-text">Guardar Cambios</span>
-        </button>
+        <div class="d-flex justify-content-between">
+          <a href="/books" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-1"></i> Volver
+          </a>
+          <button type="submit" class="btn btn-primary">
+            <span class="spinner-border spinner-border-sm loading" role="status"></span>
+            <span class="submit-text">Guardar Cambios</span>
+          </button>
+        </div>
       </form>
     </div>
   </div>
@@ -179,7 +252,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>
   <script>
-    document.getElementById('editForm').addEventListener('submit', function(e) {
+    document.getElementById('bookForm').addEventListener('submit', function(e) {
       const btn = this.querySelector('button[type="submit"]');
       btn.disabled = true;
       btn.querySelector('.submit-text').textContent = 'Guardando...';

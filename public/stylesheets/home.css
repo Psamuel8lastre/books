@@ -1,7 +1,7 @@
 body {
-  background: linear-gradient(120deg, #6366f1 0%, #60a5fa 100%);
+  background: #f1f5f9;
   min-height: 100vh;
-  color: #22223b;
+  color: #1e293b;
 }
 .hero-section {
   min-height: 80vh;
@@ -10,16 +10,42 @@ body {
   justify-content: center;
   flex-direction: column;
   text-align: center;
+  position: relative;
+}
+.hero-section:before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 120px;
+  height: 8px;
+  background: linear-gradient(90deg, #fbbf24 60%, #6366f1 100%);
+  border-radius: 8px;
+  transform: translateX(-50%);
+  z-index: 1;
 }
 .hero-title {
   font-size: 2.8rem;
   font-weight: 800;
-  color: #fff;
-  text-shadow: 0 2px 16px rgba(0,0,0,0.12);
+  color: #1e293b;
+  text-shadow: 0 2px 16px rgba(30,41,59,0.10);
+}
+.glow-title {
+  text-shadow: 0 0 16px #fbbf24, 0 2px 16px rgba(30,41,59,0.12);
+  position: relative;
+}
+.decorative-star {
+  color: #fbbf24;
+  margin-left: 0.3rem;
+  animation: star-glow 2s infinite alternate;
+}
+@keyframes star-glow {
+  from { filter: drop-shadow(0 0 0 #fbbf24); }
+  to { filter: drop-shadow(0 0 8px #fbbf24); }
 }
 .hero-desc {
   font-size: 1.25rem;
-  color: #e0e7ff;
+  color: #334155;
   margin-bottom: 2.5rem;
   margin-top: 1.2rem;
   max-width: 600px;
@@ -35,28 +61,29 @@ body {
   transition: transform 0.2s, box-shadow 0.2s;
 }
 .hero-btns .btn-primary {
-  background: #312e81;
+  background: #1e293b;
   border: none;
 }
 .hero-btns .btn-primary:hover {
-  background: #4338ca;
+  background: #334155;
   transform: translateY(-2px) scale(1.04);
 }
 .hero-btns .btn-outline-light {
-  border: 2px solid #fff;
-  color: #fff;
+  border: 2px solid #fbbf24;
+  color: #1e293b;
   background: transparent;
 }
 .hero-btns .btn-outline-light:hover {
-  background: #fff;
-  color: #312e81;
-  border-color: #fff;
+  background: #fbbf24;
+  color: #1e293b;
+  border-color: #fbbf24;
   transform: translateY(-2px) scale(1.04);
 }
 .features-section {
   background: #fff;
   border-radius: 24px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  box-shadow: 0 4px 24px rgba(30,41,59,0.07);
+  border: 2px solid #fbbf24;
   margin-top: -60px;
   padding: 2.5rem 1.5rem 2rem 1.5rem;
   max-width: 950px;
@@ -72,18 +99,53 @@ body {
 }
 .feature-title {
   font-weight: 700;
-  color: #312e81;
+  color: #1e293b;
   font-size: 1.2rem;
 }
 .feature-desc {
   color: #64748b;
   font-size: 1rem;
 }
+.literary-quote {
+  background: #fff;
+  border-left: 6px solid #fbbf24;
+  border-radius: 1rem;
+  padding: 1.2rem 2rem 1rem 2rem;
+  margin: 1.2rem auto 2.2rem auto;
+  font-family: 'Merriweather', serif;
+  font-size: 1.15rem;
+  color: #b45309;
+  max-width: 520px;
+  box-shadow: 0 2px 12px rgba(251,191,36,0.10);
+  position: relative;
+  z-index: 3;
+}
+.literary-quote i {
+  color: #fbbf24;
+  margin: 0 0.4rem;
+}
+.quote-author {
+  font-size: 0.98rem;
+  color: #b45309;
+  margin-top: 0.5rem;
+  text-align: right;
+}
+.animate-fade-in {
+  animation: fadeInUp 1.1s cubic-bezier(.39,.575,.56,1.000);
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 .app-footer {
-  background: #312e81;
-  color: #fff;
+  background: #1e293b;
+  color: #fbbf24;
   padding: 1.2rem 0 0.5rem 0;
   margin-top: 4rem;
+  border-top: 5px solid #fbbf24;
+  box-shadow: 0 -4px 24px rgba(49,46,129,0.10);
+  position: relative;
+  padding-bottom: 1.5rem;
 }
 .app-footer a {
   color: #a5b4fc;
@@ -94,4 +156,38 @@ body {
 .app-footer a:hover {
   color: #fff;
   text-decoration: underline;
+}
+.footer-divider {
+  width: 80px;
+  height: 5px;
+  background: linear-gradient(90deg, #fbbf24 60%, #6366f1 100%);
+  border-radius: 8px;
+  margin: 0 auto 1.2rem auto;
+}
+.legal-link {
+  color: #fbbf24;
+  margin-left: 1rem;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+.legal-link:hover {
+  color: #fff;
+}
+.footer-icons {
+  color: #fbbf24;
+  font-size: 1.2rem;
+  letter-spacing: 0.7rem;
+}
+@media (max-width: 600px) {
+  .literary-quote {
+    padding: 1rem 0.7rem 0.7rem 1rem;
+    font-size: 1rem;
+  }
+  .footer-divider {
+    width: 50px;
+    height: 4px;
+  }
+  .footer-icons {
+    font-size: 1rem;
+  }
 }

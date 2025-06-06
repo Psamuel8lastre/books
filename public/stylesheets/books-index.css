@@ -82,11 +82,64 @@
   box-shadow: 0 4px 24px 0 rgba(99,102,241,0.10);
   border: none;
 }
-.card-header {
+.card {
   background: #fff;
-  border-radius: 1.2rem 1.2rem 0 0;
-  border-bottom: 1px solid #f1f5f9;
-  padding: 1.2rem 1.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px rgba(30,41,59,0.10);
+  border: 2px solid #fbbf24;
+}
+.card-header {
+  background: #1e293b;
+  color: #fbbf24;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+.input-group-text {
+  background: #fbbf24;
+  color: #1e293b;
+  border: none;
+}
+.form-control {
+  border-radius: 0.5rem;
+  border: 1.5px solid #cbd5e1;
+  color: #1e293b;
+  background: #f8fafc;
+}
+.form-control:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px #fbbf24;
+}
+.form-label {
+  color: #1e293b;
+  font-weight: 600;
+}
+.btn-primary {
+  background: #1e293b;
+  border: none;
+  color: #fbbf24;
+  font-weight: 600;
+  border-radius: 2rem;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-primary:hover {
+  background: #334155;
+  color: #fff;
+}
+.btn-volver {
+  background: #fbbf24;
+  color: #1e293b;
+  border: none;
+  border-radius: 2rem;
+  font-weight: 600;
+  padding: 0.5rem 1.5rem;
+  margin-bottom: 1.2rem;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-volver:hover {
+  background: #fde68a;
+  color: #1e293b;
 }
 .table {
   background: #fff;
@@ -143,6 +196,10 @@
 .text-center.py-5 p {
   color: #7c3aed;
   font-size: 1.08rem;
+}
+body {
+  background: #f1f5f9;
+  color: #1e293b;
 }
 @media (max-width: 600px) {
   .banner { border-radius: 0.7rem; padding: 1.2rem 0.5rem; }

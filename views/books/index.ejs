@@ -1,20 +1,20 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Biblioteca Digital</title>
-  <!-- Bootstrap CSS -->
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biblioteca | Libros</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
   <link rel="stylesheet" href="/stylesheets/style.css">
-  <link rel="stylesheet" href="/stylesheets/books-index.css">
+  <link rel="stylesheet" href="/stylesheets/index.css">
+  <link rel="icon" href="/images/bibiotecalogo-removebg-preview.png" type="image/x-icon">
 </head>
 <body>
-  <div class="app-container">
+  <div class="wrapper d-flex">
     <!-- Sidebar -->
-    <nav class="sidebar">
+    <div class="sidebar col-md-3 col-lg-2 p-0">
       <div class="p-4">
         <h4 class="mb-4 text-center">
           <i class="fas fa-book-open me-2"></i>Biblioteca 
@@ -22,11 +22,11 @@
         <hr class="bg-light opacity-25">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link " href="/">
+            <a class="nav-link" href="/">
               <i class="fas fa-tachometer-alt me-2"></i>Dashboard
             </a>
           </li>
-          <li class="nav-item ">
+          <li class="nav-item">
             <a class="nav-link active" href="/books">
               <i class="fas fa-book me-2"></i>Libros
             </a>
@@ -53,125 +53,167 @@
           </li>
         </ul>
       </div>
-    </nav>
+    </div>
 
-    <!-- Contenido Principal -->
-    <main class="main-content">
-      <!-- Banner -->
-      <div class="banner bg-primary text-white py-5 mb-4 text-center">
-        <h1 class="display-4"><i class="fas fa-book-open mr-3"></i> Biblioteca Digital</h1>
-        <p class="lead">Gestiona tu colección de libros favoritos</p>
-        <a href="/books/add" class="btn btn-light btn-lg mt-3">
-          <i class="fas fa-plus-circle"></i> Agregar Libro
-        </a>
-      </div>
-
-      <!-- Mensajes Flash -->
-      <% if (messages && (messages.success || messages.error)) { %>
-        <div id="floating-alert" class="custom-alert <%= messages.success ? 'custom-alert-success' : 'custom-alert-danger' %>">
-          <div class="d-flex align-items-center">
-            <div class="me-3">
-              <% if (messages.success) { %>
-                <i class="fas fa-check-circle fa-2x"></i>
-              <% } else { %>
-                <i class="fas fa-exclamation-circle fa-2x"></i>
-              <% } %>
-            </div>
-            <div class="flex-fill">
-              <%= messages.success || messages.error %>
-            </div>
+    <!-- Main Content -->
+    <div class="main-content col-md-9 col-lg-10 p-0 bg-light">
+      <!-- Top Bar -->
+      <nav class="navbar navbar-expand navbar-light bg-darck shadow-sm">
+        <div class="container-fluid">
+          <div class="search-box ms-3 w-50">
+            <i class="fas fa-search"></i>
+            <input class="form-control" type="search" placeholder="Buscar libros..." id="globalSearch">
           </div>
-        </div>
-      <% } %>
-
-      <div class="card shadow-sm">
-        <div class="card-header d-flex flex-column flex-md-row justify-content-between align-items-center bg-white">
-          <h3 class="mb-3 mb-md-0"><i class="fas fa-list-ul text-primary mr-2"></i>Lista de Libros</h3>
-          <div class="d-flex flex-column flex-md-row align-items-center w-100 w-md-auto">
-            <form class="d-flex mb-2 mb-md-0 mr-md-2 w-100" onsubmit="return validateSearch()">
-              <div class="input-group">
-                <input class="form-control" type="search" placeholder="Buscar libro..." aria-label="Search" id="searchInput">
-                <div class="input-group-append">
-                  <button class="btn btn-outline-primary" type="submit">
-                    <i class="fas fa-search"></i>
-                  </button>
-                </div>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item dropdown ms-2">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                <img src="/images/perfil.png" class="rounded-circle me-1" width="30" height="30">
+                Samuel
+              </a>
+              <div class="dropdown-menu dropdown-menu-end">
+                <a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Perfil</a>
+                <a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Configuración</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Cerrar sesión</a>
               </div>
-            </form>
-          </div>
+            </li>
+          </ul>
         </div>
+      </nav>
 
-        <% if(data.length) { %>
-          <div class="table-responsive">
-            <table class="table table-hover mb-0">
-              <thead class="thead-light">
-                <tr>
-                  <th>#</th>
-                  <th>ISBN</th>
-                  <th>Nombre</th>
-                  <th>Autor</th>
-                  <th>Editorial</th>
-                  <th>Año</th>
-                  <th>Páginas</th>
-                  <th>Ejemplares</th>
-                  <th>Categoría</th>
-                  <th class="text-center">Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% for(var i = 0; i < data.length; i++) { %>
-                  <tr>
-                    <th scope="row"><%= (i+1) %></th>
-                    <td><%= data[i].isbn %></td>
-                    <td><%= data[i].name %></td>
-                    <td><%= data[i].author %></td>
-                    <td><%= data[i].editorial %></td>
-                    <td><%= data[i].year %></td>
-                    <td><%= data[i].pages %></td>
-                    <td><%= data[i].copies %></td>
-                    <td><%= data[i].category %></td>
-                    <td class="text-center">
-                      <a href="../books/edit/<%= data[i].id %>" class="btn btn-sm btn-outline-success mr-2">
-                        <i class="fas fa-edit"></i> Editar
-                      </a>
-                      <a href="../books/delete/<%= data[i].id %>" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Estás seguro?')">
-                        <i class="fas fa-trash-alt"></i> Eliminar
-                      </a>
-                    </td>
-                  </tr>
+      <div class="container-fluid p-4">
+        <div class="cita-literaria mb-4">
+          <i class="fas fa-quote-left me-2"></i>
+          “Un libro es un sueño que tienes en tus manos.”
+          <span class="d-block text-end mt-2" style="font-size:0.95rem;color:#b45309;">— Neil Gaiman</span>
+        </div>
+        <!-- Alerta de bienvenida o error -->
+        <% if (messages && (messages.success || messages.error)) { %>
+          <div id="floating-alert" class="custom-alert <%= messages.success ? 'custom-alert-success' : 'custom-alert-danger' %>">
+            <div class="d-flex align-items-center">
+              <div class="me-3">
+                <% if (messages.success) { %>
+                  <i class="fas fa-check-circle fa-2x"></i>
+                <% } else { %>
+                  <i class="fas fa-exclamation-circle fa-2x"></i>
                 <% } %>
-              </tbody>
-            </table>
+              </div>
+              <div class="flex-fill">
+                <%= messages.success || messages.error %>
+              </div>
+            </div>
           </div>
-        <% } else { %>
-          <div class="text-center py-5">
-            <img src="https://cdn-icons-png.flaticon.com/512/2748/2748558.png" width="100" class="mb-3 opacity-50">
-            <h5 class="text-muted">No hay libros registrados</h5>
-            <p class="text-muted">Comienza agregando tu primer libro</p>
+        <% } %>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const alert = document.getElementById('floating-alert');
+          if(alert) {
+            setTimeout(() => {
+              alert.style.opacity = '0';
+              alert.style.top = '0px';
+              setTimeout(() => alert.remove(), 600);
+            }, 3500);
+          }
+        });
+        </script>
+
+        <!-- Sección: Lista de Libros -->
+        <div class="card shadow mb-5">
+          <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+            <h5 class="mb-0 text-primary">
+              <i class="fas fa-book me-2"></i>Catálogo de Libros
+            </h5>
             <a href="/books/add" class="btn btn-primary">
               <i class="fas fa-plus-circle"></i> Agregar Libro
             </a>
           </div>
-        <% } %>
+          <div class="card-body">
+            <% if(data.length) { %>
+              <div class="table-responsive">
+                <table id="booksTable" class="table table-hover mb-0">
+                  <thead class="thead-light">
+                    <tr>
+                      <th>#</th>
+                      <th>ISBN</th>
+                      <th>Nombre</th>
+                      <th>Autor</th>
+                      <th>Editorial</th>
+                      <th>Año</th>
+                      <th>Páginas</th>
+                      <th>Ejemplares</th>
+                      <th>Categoría</th>
+                      <th class="text-center">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% for(var i = 0; i < data.length; i++) { %>
+                      <tr>
+                        <th scope="row"><%= (i+1) %></th>
+                        <td><%= data[i].isbn %></td>
+                        <td><%= data[i].name %></td>
+                        <td><%= data[i].author %></td>
+                        <td><%= data[i].editorial %></td>
+                        <td><%= data[i].year %></td>
+                        <td><%= data[i].pages %></td>
+                        <td><%= data[i].copies %></td>
+                        <td><%= data[i].category %></td>
+                        <td class="text-center">
+                          <a href="../books/edit/<%= data[i].id %>" class="btn btn-sm btn-outline-success me-2">
+                            <i class="fas fa-edit"></i> Editar
+                          </a>
+                          <a href="../books/delete/<%= data[i].id %>" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Estás seguro?')">
+                            <i class="fas fa-trash-alt"></i> Eliminar
+                          </a>
+                        </td>
+                      </tr>
+                    <% } %>
+                  </tbody>
+                </table>
+              </div>
+            <% } else { %>
+              <div class="text-center py-5">
+                <img src="https://cdn-icons-png.flaticon.com/512/2748/2748558.png" width="100" class="mb-3 opacity-50">
+                <h5 class="text-muted">No hay libros registrados</h5>
+                <p class="text-muted">Comienza agregando tu primer libro</p>
+                <a href="/books/add" class="btn btn-primary">
+                  <i class="fas fa-plus-circle"></i> Agregar Libro
+                </a>
+              </div>
+            <% } %>
+          </div>
+        </div>
       </div>
-    </main>
+      <footer class="app-footer">
+        <div class="footer-bottom">
+          <div class="copyright">
+            &copy; 2023 Biblioteca Digital. Todos los derechos reservados.
+          </div>
+          <div class="legal-links">
+            <a href="#" class="legal-link">Términos de servicio</a>
+            <a href="#" class="legal-link">Política de privacidad</a>
+            <a href="#" class="legal-link">Aviso legal</a>
+          </div>
+        </div>
+      </footer>
+    </div>
   </div>
-
-  <!-- Bootstrap JS -->
-  <script src="/js/jquery-3.2.1.slim.min.js"></script>
-  <script src="/js/popper.min.js"></script>
-  <script src="/js/bootstrap.min.js"></script>
-  <script src="/js/books.js"></script>
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const alert = document.getElementById('floating-alert');
-      if(alert) {
-        setTimeout(() => {
-          alert.style.opacity = '0';
-          alert.style.top = '0px';
-          setTimeout(() => alert.remove(), 600);
-        }, 3500);
-      }
+    $(document).ready(function() {
+      $('#booksTable').DataTable({
+        language: {
+          url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+        },
+        dom: '<"top"f>rt<"bottom"lip><"clear">',
+        responsive: true
+      });
+      $('#globalSearch').on('keyup', function() {
+        $('#booksTable').DataTable().search(this.value).draw();
+      });
     });
   </script>
 </body>

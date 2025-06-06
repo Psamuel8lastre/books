@@ -63,19 +63,14 @@
           <label class="form-label">Autor:</label>
           <div class="input-group">
             <span class="input-group-text"><i class="fas fa-user-pen"></i></span>
-            <input type="text" class="form-control <%= messages.fieldErrors?.author ? 'is-invalid' : '' %>" 
-                   name="author" value="<%= author %>" list="authors" placeholder="Selecciona o ingresa un autor" required>
-            <datalist id="authors">
+            <select class="form-control <%= messages.fieldErrors?.author ? 'is-invalid' : '' %>" name="author" required>
+              <option value="">Selecciona un autor</option>
               <% if (autores && autores.length) { %>
                 <% autores.forEach(function(autor) { %>
-                  <option value="<%= autor.name %>">
+                  <option value="<%= autor.name %>" <%= author === autor.name ? 'selected' : '' %>><%= autor.name %></option>
                 <% }) %>
-              <% } else { %>
-                <option value="J.K. Rowling">
-                <option value="George Orwell">
-                <option value="Jane Austen">
               <% } %>
-            </datalist>
+            </select>
             <% if (messages.fieldErrors?.author) { %>
               <div class="invalid-feedback">
                 <%= messages.fieldErrors.author %>
@@ -88,14 +83,14 @@
           <label class="form-label">Editorial:</label>
           <div class="input-group">
             <span class="input-group-text"><i class="fas fa-building"></i></span>
-            <input type="text" class="form-control <%= messages.fieldErrors?.editorial ? 'is-invalid' : '' %>" name="editorial" value="<%= editorial %>" list="editoriales" placeholder="Editorial" required>
-            <datalist id="editoriales">
+            <select class="form-control <%= messages.fieldErrors?.editorial ? 'is-invalid' : '' %>" name="editorial" required>
+              <option value="">Selecciona una editorial</option>
               <% if (editoriales && editoriales.length) { %>
                 <% editoriales.forEach(function(ed) { %>
-                  <option value="<%= ed.name %>">
+                  <option value="<%= ed.name %>" <%= editorial === ed.name ? 'selected' : '' %>><%= ed.name %></option>
                 <% }) %>
               <% } %>
-            </datalist>
+            </select>
             <% if (messages.fieldErrors?.editorial) { %>
               <div class="invalid-feedback">
                 <%= messages.fieldErrors.editorial %>
@@ -159,10 +154,15 @@
           </div>
         </div>
 
-        <button type="submit" class="btn btn-primary w-100">
-          <span class="spinner-border spinner-border-sm loading" role="status"></span>
-          <span class="submit-text">Agregar Libro</span>
-        </button>
+        <div class="d-flex justify-content-between">
+          <a href="/books" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-1"></i> Volver
+          </a>
+          <button type="submit" class="btn btn-primary">
+            <span class="spinner-border spinner-border-sm loading" role="status"></span>
+            <span class="submit-text">Agregar Libro</span>
+          </button>
+        </div>
       </form>
     </div>
   </div>

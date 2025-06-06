@@ -42,3 +42,117 @@
   color: #065f46;
   border-left: 6px solid #10b981;
 }
+
+/* Paleta principal */
+body, .main-content {
+  background: #f1f5f9;
+  font-family: 'Inter', Arial, sans-serif;
+}
+.sidebar {
+  background: #1e293b;
+  color: #fff;
+  min-height: 100vh;
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  box-shadow: 2px 0 16px rgba(30,41,59,0.08);
+}
+.sidebar h4, .sidebar .nav-link.active {
+  color: #fbbf24;
+}
+.sidebar .nav-link {
+  color: #cbd5e1;
+  transition: background 0.2s, color 0.2s;
+  border-radius: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+.sidebar .nav-link:hover, .sidebar .nav-link.active {
+  background: #334155;
+  color: #fbbf24;
+}
+
+/* Topbar */
+.navbar {
+  background: #fff !important;
+  border-bottom: 1px solid #e5e7eb;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+}
+
+/* Cards de contadores */
+.stats-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.stats-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 8px 32px rgba(30,41,59,0.12);
+}
+.icon-bg {
+  border: 3px solid #fbbf24;
+}
+
+/* Catálogo de libros */
+.card.h-100 {
+  border: none;
+  border-radius: 1.5rem;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.card.h-100:hover {
+  box-shadow: 0 8px 32px rgba(30,41,59,0.10);
+  transform: translateY(-4px) scale(1.02);
+}
+.card-title {
+  font-family: 'Merriweather', serif;
+  font-size: 1.1rem;
+}
+
+/* Nueva sección: Recomendaciones */
+#recomendaciones {
+  background: linear-gradient(135deg, #fffbe6 60%, #fbbf24 100%);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px rgba(251,191,36,0.08);
+  padding: 2rem 1.5rem;
+  margin-bottom: 2rem;
+}
+#recomendaciones h4 {
+  color: #b45309;
+  font-family: 'Merriweather', serif;
+}
+
+/* Footer */
+.app-footer {
+  background: #1e293b;
+  color: #fbbf24;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  margin-top: 2rem;
+}
+.legal-link {
+  color: #fbbf24;
+  margin-left: 1rem;
+  text-decoration: underline;
+}
+.legal-link:hover {
+  color: #fff;
+}
+
+/* Cita literaria */
+.cita-literaria {
+  background: #fff;
+  border-left: 6px solid #fbbf24;
+  border-radius: 1rem;
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+  font-family: 'Merriweather', serif;
+  font-size: 1.2rem;
+  color: #334155;
+  box-shadow: 0 2px 12px rgba(30,41,59,0.06);
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    border-radius: 0;
+  }
+  .main-content {
+    border-radius: 0;
+  }
+}
