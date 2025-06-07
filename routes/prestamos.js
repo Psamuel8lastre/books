@@ -27,8 +27,14 @@ router.get('/', async (req, res) => {
 });
 
 // Formulario agregar préstamo
-router.get('/add', (req, res) => {
-  res.render('books/prestamos_add', { libro: '', usuario: '', fecha_prestamo: '', fecha_devolucion: '', estado: '', messages: req.flash() });
+router.get('/add', async (req, res) => {
+  try {
+    const [libros] = await db.query('SELECT id, name FROM books ORDER BY name ASC');
+    res.render('books/prestamos_add', { libro: '', usuario: '', fecha_prestamo: '', fecha_devolucion: '', estado: '', libros, messages: req.flash() });
+  } catch (err) {
+    req.flash('error', 'No se pudieron cargar los libros');
+    res.render('books/prestamos_add', { libro: '', usuario: '', fecha_prestamo: '', fecha_devolucion: '', estado: '', libros: [], messages: req.flash() });
+  }
 });
 
 // Agregar préstamo

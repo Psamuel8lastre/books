@@ -57,4 +57,11 @@ router.post('/recuperar', async (req, res) => {
   res.redirect('/auth/recuperar');
 });
 
+// Logout
+router.get('/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.render('login', { messages: { success: 'Cerraste sesión correctamente.' } });
+  });
+});
+
 module.exports = router;
